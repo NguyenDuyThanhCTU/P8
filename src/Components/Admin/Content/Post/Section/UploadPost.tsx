@@ -7,7 +7,7 @@ import { useStateProvider } from "../../../../../Context/StateProvider";
 import { addDocument } from "../../../../../Config/Services/Firebase/FireStoreDB";
 import { convertToCodeFormat, uploadImage } from "../../../Item/Handle";
 import { TypePostItems } from "../../../../../Utils/item";
-import TextArea from "antd/es/input/TextArea";
+
 import Input from "../../../Item/Input";
 
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;

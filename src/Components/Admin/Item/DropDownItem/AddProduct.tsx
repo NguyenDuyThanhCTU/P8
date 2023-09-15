@@ -12,7 +12,7 @@ import Input from "../Input";
 import { useStateProvider } from "../../../../Context/StateProvider";
 import { useData } from "../../../../Context/DataProviders";
 import { TypeProductItems } from "../../../../Utils/item";
-import { uploadImage } from "../Handle";
+import { convertToCodeFormat, uploadImage } from "../Handle";
 import { addDocument } from "../../../../Config/Services/Firebase/FireStoreDB";
 import TextEditor from "../../../Item/TextEditor";
 
@@ -21,10 +21,13 @@ const AddProduct = ({}) => {
   const [Title, setTitle] = useState<string | undefined>();
   const [Price, setPrice] = useState<string | undefined>();
   const [Content, setContent] = useState<string | undefined>();
-  const [isType, setIsType] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
-  const [isParent, setIsParent] = useState("Men");
-  const [isChildren, setIsChildren] = useState<any>([]);
+  const [isType, setIsType] = useState<any>();
+  const [isParent, setIsParent] = useState("Hộp quà - giỏ quà");
+  const [isChildren, setIsChildren] = useState<any>();
+  const [typeUrl, setTypeUrl] = useState<string | undefined>();
+  const [parentUrl, setParentUrl] = useState<string | undefined>();
+  const [childrenUrl, setChildrenUrl] = useState<string | undefined>();
   const [ListSubImage, setListSubImage] = useState<any>([]);
   const { setDropDown, setIsRefetch } = useStateProvider();
   const { productTypes } = useData();
@@ -32,9 +35,26 @@ const AddProduct = ({}) => {
   const [openDescription, setOpenDescription] = useState(false);
   const { Option } = Select;
 
-  const handleChange = (value: string[]) => {
-    setIsChildren(value);
-  };
+  const initial1 =
+    "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
+  const initDescribe = "<p> mô tả sản phẩm </p>";
+
+  //convert to url,ex: "Hộp quà - giỏ quà" => "hop-qua-gio-qua"
+  useEffect(() => {
+    const handleChange = () => {
+      const formattedInput = convertToCodeFormat(
+        isType || isParent || isChildren
+      );
+
+      if (formattedInput) {
+        if (isType) setTypeUrl(formattedInput);
+        if (isParent) setParentUrl(formattedInput);
+        if (isChildren) setChildrenUrl(formattedInput);
+      }
+    };
+
+    handleChange();
+  }, [isType, isParent, isChildren]);
 
   const handleDiscard = () => {
     setDropDown("");
@@ -45,12 +65,9 @@ const AddProduct = ({}) => {
     setDescribe("");
     setListSubImage("");
   };
-  const initial1 =
-    "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
-  const initDescribe = "<p> mô tả sản phẩm </p>";
 
   const HandleSubmit = () => {
-    if (!Title || !Price || !imageUrl || !isType) {
+    if (!Title) {
       notification["error"]({
         message: "Lỗi !!!",
         description: `Vui lòng bổ sung đầy đủ thông tin !`,
@@ -63,7 +80,9 @@ const AddProduct = ({}) => {
         price: Price,
         image: imageUrl,
         type: isType,
+        typeUrl: typeUrl,
         parent: isParent,
+        parentUrl: parentUrl,
         state: "Còn hàng",
         sale: {
           discount: 0,
@@ -72,6 +91,7 @@ const AddProduct = ({}) => {
         access: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
         subimage: ListSubImage,
         children: isChildren,
+        childrenUrl: childrenUrl,
       };
 
       for (let key in data) {
@@ -93,11 +113,11 @@ const AddProduct = ({}) => {
   };
 
   const HandleUploadImage = (e: any, locate: string, type: string) => {
-    if (type === "image") {
+    if (type === "mainImage") {
       uploadImage(e, locate).then((data: any) => {
         setImageUrl(data);
       });
-    } else if (type === "color") {
+    } else if (type === "subImage") {
       uploadImage(e, locate).then((data) => {
         setListSubImage((prevUrls: any) => [...prevUrls, data]);
       });
@@ -117,7 +137,7 @@ const AddProduct = ({}) => {
       (item: any) => item.parentName === isParent
     );
     if (sort) {
-      setIsType(sort[0].name);
+      setIsType(sort[0]?.name);
     }
   }, [isParent]);
 
@@ -150,7 +170,7 @@ const AddProduct = ({}) => {
                         <input
                           type="file"
                           onChange={(e) =>
-                            HandleUploadImage(e, "products", "image")
+                            HandleUploadImage(e, "products", "mainImage")
                           }
                           className="w-0 h-0"
                           id="fileInput"
@@ -253,10 +273,9 @@ const AddProduct = ({}) => {
                       </label>
 
                       <Select
-                        mode="multiple"
                         style={{ width: "100%" }}
                         placeholder="Chọn loại bài viết"
-                        onChange={handleChange}
+                        onChange={setIsChildren}
                         optionLabelProp="label"
                       >
                         {productTypes
@@ -305,7 +324,7 @@ const AddProduct = ({}) => {
                           <input
                             type="file"
                             onChange={(e) =>
-                              HandleUploadImage(e, "color", "color")
+                              HandleUploadImage(e, "color", "subImage")
                             }
                             className="w-0 h-0"
                             id="fileInput"

@@ -21,7 +21,7 @@ const ListProduct: React.FC = () => {
             <div className="p-2">
               {TypeProductItems.map((items, idx) => {
                 const children = productTypes.filter(
-                  (data: any) => data.parentName === items.label
+                  (data: any) => data.parent === items.label
                 );
 
                 return (
@@ -32,13 +32,13 @@ const ListProduct: React.FC = () => {
                         {children.map((item: any, idx: any) => (
                           <div key={idx}>
                             {" "}
-                            <span className="text-[18px]">{item.name}</span>
+                            <span className="text-[18px]">{item.type}</span>
                             {item.children.length > 0 && (
                               <div>
                                 {item.children.map((data: any, idx: any) => (
                                   <div className="ml-6 indent-2 flex flex-col border-l-2 border-black">
                                     <span className="text-[16px]">
-                                      {data.name}
+                                      {data.children}
                                     </span>
                                   </div>
                                 ))}

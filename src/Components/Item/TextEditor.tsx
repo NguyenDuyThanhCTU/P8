@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-const Editor = ({ initialValue, onChange }: any) => {
+const TextEditor = ({ initialValue, onChange }: any) => {
   const [editorData, setEditorData] = useState(initialValue);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const Editor = ({ initialValue, onChange }: any) => {
   );
 };
 
-export default Editor;
+export default TextEditor;

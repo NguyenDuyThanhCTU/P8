@@ -46,10 +46,10 @@ const AddType: React.FC = () => {
       });
     } else {
       const data = {
-        name: Name,
-        params: Params,
-        parentName: Parent,
-        parentParams: ParentParams,
+        type: Name,
+        typeUrl: Params,
+        parent: Parent,
+        parentUrl: ParentParams,
         children: [],
       };
 
@@ -170,8 +170,8 @@ const AddType: React.FC = () => {
                         </>
                       )}
                     </div>
-                    <p className=" truncate">{data.name}</p>
-                    <p className=" truncate">{data.parentName}</p>
+                    <p className=" truncate">{data.type}</p>
+                    <p className=" truncate">{data.parent}</p>
 
                     <div className="ml-5">
                       {data.daysSinceCreation > 0 ? (

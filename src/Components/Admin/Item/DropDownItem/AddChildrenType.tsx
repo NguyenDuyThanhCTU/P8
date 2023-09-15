@@ -43,10 +43,8 @@ const AddChildrenType = () => {
       });
     } else {
       const data = {
-        name: Name,
-        params: Params,
-        parentName: isType.name,
-        parentParams: isType.params,
+        children: Name,
+        childrenUrl: Params,
       };
 
       addDataToArrayField("productTypes", UpdateId, "children", data).then(
@@ -110,7 +108,7 @@ const AddChildrenType = () => {
               <div className="grid  cols-4 items-center py-2  justify-start  border-t border-l border-r border-black">
                 <p> </p>
                 <p>Tên thể loại</p>
-                <p>Mục</p>
+
                 <p>Thời gian</p>
               </div>
               <div className="w-full border border-black h-[300px] overflow-y-scroll">
@@ -150,8 +148,7 @@ const AddChildrenType = () => {
                         </>
                       )}
                     </div>
-                    <p className=" truncate">{data.name}</p>
-                    <p className=" truncate">{data.parentName}</p>
+                    <p className=" truncate">{data.children}</p>
 
                     <div className="ml-5">
                       {data.daysSinceCreation > 0 ? (

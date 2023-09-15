@@ -5,6 +5,7 @@ import Home from "../Components/Client/Home/Home";
 import Introduction from "../Components/Client/Introduction/Introduction";
 import News from "../Components/Client/News/News";
 import Process from "../Components/Client/Process/Process";
+import Products from "../Components/Client/Products/Products";
 
 import Video from "../Components/Client/Video/Video";
 import PostDetail from "../Components/Item/PostDetail";
@@ -61,6 +62,16 @@ export const AllRoutes = [
   {
     path: "/quy-trinh-san-xuat/",
     component: Process,
+    Layout: ClientLayout,
+  },
+  {
+    path: "/san-pham/",
+    component: Products,
+    Layout: ClientLayout,
+  },
+  {
+    path: "/san-pham/:id",
+    component: Products,
     Layout: ClientLayout,
   },
 ];

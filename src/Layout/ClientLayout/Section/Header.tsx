@@ -5,7 +5,7 @@ import { useStateProvider } from "../../../Context/StateProvider";
 
 import DropDown from "../Item/DropDown";
 
-import { HeaderItems } from "../../../Utils/item";
+import { HeaderItems, TypeProductItems } from "../../../Utils/item";
 import { RxCross1 } from "react-icons/rx";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 import { AiFillCaretRight } from "react-icons/ai";
@@ -126,10 +126,6 @@ const Header: React.FC = () => {
               style={{ top: `${elementTop}px` }}
             >
               {HeaderItems.map((items, idx) => {
-                const sort = productTypes.filter(
-                  (item: any) => item.parentParams === items.link
-                );
-
                 return (
                   <div className="relative" key={idx}>
                     <Link to={`/${items.link}`}>
@@ -151,68 +147,44 @@ const Header: React.FC = () => {
                           }}
                         >
                           <p> {items.name}</p>
-                          {sort.length > 0 && (
+                          {items.name === "Sản phẩm" && (
                             <AiFillCaretRight className="group-hover/main:rotate-90 duration-500" />
                           )}
                         </div>
 
-                        {/*  */}
-                        {sort.length > 0 && (
+                        {items.name === "Sản phẩm" && (
                           <div className="group-hover/main:block hidden relative z-20">
                             <div className="absolute h-10 w-full bg-none"></div>
                             <div className="  absolute  mt-5 w-[340px] max-h-[300px]  shadow-xl rounded-b-lg bg-white  overflow-y-auto overflow-x-visible">
-                              {sort.map((items: any, idx: number) => (
-                                <div key={idx}>
-                                  <div className="w-full">
-                                    <div
-                                      className="py-4 px-8 font-light text-black group duration-300 hover:text-white hover:bg-mainpink flex justify-between items-center w-full"
-                                      onClick={() => HandleOpenSubMenu(idx + 1)}
-                                    >
-                                      <Link
-                                        to={`${
-                                          items.parent === "album-anh"
-                                            ? `/album-anh/${items.params}`
-                                            : `/loai-san-pham/${items.params}`
-                                        }`}
-                                      >
-                                        <span>{items.name}</span>
-                                      </Link>
-                                      {items.children.length > 0 && (
-                                        <AiFillCaretRight
-                                          className={`${
-                                            isOpenSubMenu === idx + 1 &&
-                                            "rotate-90"
-                                          } duration-500 text-black`}
-                                        />
-                                      )}
+                              {TypeProductItems.map(
+                                (items: any, idx: number) => {
+                                  const sort = productTypes.filter(
+                                    (item: any) =>
+                                      item.parentUrl === items.value
+                                  );
+                                  return (
+                                    <div key={idx} className="relative">
+                                      <div className="w-full group/level1  ">
+                                        <div className="py-4 px-8 font-light text-black group duration-300 hover:text-mainred hover:bg-mainpink flex justify-between items-center w-full">
+                                          <Link
+                                            to={`${`/san-pham/${items.value}`}`}
+                                          >
+                                            <span>{items.label}</span>
+                                          </Link>
+                                          {sort.length > 0 && (
+                                            <AiFillCaretRight
+                                              className={` rotate-90 group-hover/level1:rotate-0 duration-500 text-black`}
+                                            />
+                                          )}
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div
-                                      className={`${
-                                        isOpenSubMenu === idx + 1
-                                          ? " h-max"
-                                          : " h-0"
-                                      } overflow-hidden duration-500  block`}
-                                    >
-                                      {items.children.length > 0 && (
-                                        <>
-                                          {items.children.map((items: any) => (
-                                            <Link
-                                              to={`/loai-san-pham/${items.params}`}
-                                            >
-                                              <div
-                                                className="py-4 px-8 pl-14 font-light duration-300 text-mainblue hover:text-white hover:bg-mainblue cursor-pointer"
-                                                key={idx}
-                                              >
-                                                {items.name}
-                                              </div>
-                                            </Link>
-                                          ))}
-                                        </>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
+                                  );
+                                }
+                              )}
+                            </div>
+                            <div className="relative">
+                              <div className="absolute w-20 h-20 bg-red-500 -left-6"></div>
                             </div>
                           </div>
                         )}

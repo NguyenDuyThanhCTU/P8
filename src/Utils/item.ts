@@ -302,20 +302,12 @@ export const TypePostItems = [
 
 export const TypeProductItems = [
   {
-    label: "Men",
-    value: "men",
+    label: "Hộp quà - giỏ quà",
+    value: "hop-qua-gio-qua",
   },
   {
-    label: "Women",
-    value: "women",
-  },
-  {
-    label: "Boy",
-    value: "boy",
-  },
-  {
-    label: "Girls",
-    value: "girls",
+    label: "Yến sào",
+    value: "yen-sao",
   },
 ];
 export {};

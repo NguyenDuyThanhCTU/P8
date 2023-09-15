@@ -15,8 +15,7 @@ module.exports = {
         LexendDeca: ["Lexend Deca", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
         //custom font
-        NunitoSans: ["Nunito Sans", "sans-serif"],
-        SVNDancing: ["SVN-Dancing", "sans-serif"],
+        UTMAmerican: ["UTM American Sans", "sans-serif"],
       },
       colors: {
         //system colors
@@ -29,8 +28,8 @@ module.exports = {
         purpleHover: "#BB86FC",
         BlueFF: "#1A49FF",
         //Custom colors
-        mainblue: "#3696b4",
-        mainpink: "#ac192c",
+        mainyellow: "#f7ef00",
+        mainred: "#d70000",
       },
 
       // custom

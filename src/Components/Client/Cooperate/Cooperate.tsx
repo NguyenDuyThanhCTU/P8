@@ -4,7 +4,7 @@ import { SlCalender } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 
-const News: React.FC = () => {
+const Cooperate: React.FC = () => {
   const { Posts } = useData();
   const [currentItems, setCurrentItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +14,7 @@ const News: React.FC = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   useEffect(() => {
     setCurrentItems(
-      Posts.filter((items: any) => items.type === "news").slice(
+      Posts.filter((items: any) => items.type === "cooperate").slice(
         indexOfFirstItem,
         indexOfLastItem
       )
@@ -31,7 +31,7 @@ const News: React.FC = () => {
         <div className="h-10 flex  justify-center items-center gap-5">
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit.png)] h-4 w-[83px] bg-cover bg-no-repeat"></div>
           <h3 className="text-mainred text-[30px] uppercase leading-10 font-UTMAmerican font-bold">
-            Tin tức
+            hợp tác
           </h3>
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit1.png)] h-4 w-[86px] bg-cover bg-no-repeat"></div>
         </div>
@@ -85,4 +85,4 @@ const News: React.FC = () => {
   );
 };
 
-export default News;
+export default Cooperate;

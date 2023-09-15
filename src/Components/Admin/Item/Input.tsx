@@ -3,7 +3,7 @@ import React from "react";
 const Input = ({ text, Value, setValue, Input, PlaceHolder }: any) => {
   return (
     <div className="w-full">
-      <div className="mb-5">
+      <div className="mb-2">
         <label className="block  text-sm font-bold mb-2">{text}</label>
 
         {Input ? (

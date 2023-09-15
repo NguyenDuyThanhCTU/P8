@@ -121,7 +121,7 @@ const Header: React.FC = () => {
               className={`fixed z-10 ${
                 IsTranslate
                   ? `w-full bg-white text-black `
-                  : " w-[1600px] bg-mainblue text-white  "
+                  : " w-[1600px] bg-gradient-to-b from-[#c5161d] via-[#de393e]  to-[#d0191e] text-white  "
               }   duration-300 h-[69px] rounded-lg flex justify-center px-5  items-center text-normal font-semibold gap-16`}
               style={{ top: `${elementTop}px` }}
             >

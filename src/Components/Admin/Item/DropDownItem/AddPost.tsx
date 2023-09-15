@@ -12,6 +12,8 @@ const AddPost: React.FC = () => {
   const { setIsRefetch, setDropDown } = useStateProvider();
   const { UpdateId, Posts } = useData();
 
+  const initialEditor = "<p>Bắt đầu nhập ... </p>";
+
   useEffect(() => {
     const sort = Posts.filter((item: any) => item.id === UpdateId);
     if (sort.length > 0) {
@@ -40,6 +42,7 @@ const AddPost: React.FC = () => {
         });
         HandleDiscard();
         setIsRefetch("add posts");
+        setDropDown("");
       });
     }
   };
@@ -52,15 +55,15 @@ const AddPost: React.FC = () => {
         <div className="items-center justify-center  w-full flex  ">
           <div className="flex w-full h-full  justify-center gap-4 flex-col items-center ">
             <p className="text-2xl font-bold text-center mb-5">
-              Nội dung bài viết {PostSort?.title}
+              Nội dung bài viết: {PostSort?.title}
             </p>
 
-            <div className=" w-[60vw] mx-auto overflow-y-auto h-[500px] ">
+            <div className=" w-[60vw] mx-auto overflow-y-auto h-[500px] font-LexendDeca font-light">
               <TextEditor
-                editorData={
-                  PostSort?.content ? `${PostSort?.content}` : `${editorData}`
+                initialValue={
+                  PostSort?.content ? PostSort.content : initialEditor
                 }
-                setEditorData={setEditorData}
+                onChange={setEditorData}
               />
             </div>
 

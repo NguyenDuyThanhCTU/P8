@@ -15,8 +15,8 @@ import {
 } from "../../../../Config/Services/Firebase/FireStoreDB";
 import { TypeProductItems } from "../../../../Utils/item";
 
-import { uploadImage } from "../Handle";
-import diacritic from "diacritic";
+import { convertToCodeFormat, uploadImage } from "../Handle";
+
 import Table from "../Table";
 
 type ChangeEventType = React.ChangeEvent<HTMLInputElement>;
@@ -73,11 +73,6 @@ const AddType: React.FC = () => {
       });
     });
     setIsRefetch("deleted");
-  };
-
-  const convertToCodeFormat = (text: any) => {
-    const textWithoutDiacritics = diacritic.clean(text);
-    return textWithoutDiacritics.replace(/\s+/g, "-").toLowerCase();
   };
 
   useEffect(() => {

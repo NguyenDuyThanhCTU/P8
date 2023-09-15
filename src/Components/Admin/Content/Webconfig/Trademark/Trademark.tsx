@@ -74,15 +74,13 @@ const Trademark: React.FC = () => {
     } else {
       let newData: { [key: string]: string } = {};
       if (idx === 0) {
-        newData = { websiteLogo: Data };
-      } else if (idx === 1) {
-        newData = { websiteIco: Data };
-      } else if (idx === 3) {
-        newData = { websiteLogo: LogoUrl };
-      } else if (idx === 4) {
-        newData = { websiteIco: IcoUrl };
-      } else if (idx === 5) {
         newData = { websiteName: Data };
+      } else if (idx === 1) {
+        newData = { websiteSlogan: Data };
+      } else if (idx === 3) {
+        newData = { websiteLogo: Data ? Data : LogoUrl };
+      } else if (idx === 4) {
+        newData = { websiteIco: Data ? Data : LogoUrl };
       }
       updateDocument("website", "Trademark", newData).then(() => {
         notification.success({
@@ -145,7 +143,7 @@ const Trademark: React.FC = () => {
                 <div className="flex gap-5 d:flex-row p:flex-col">
                   {Type && (
                     <div
-                      onClick={() => setSelected(idx)}
+                      onClick={() => setSelected(idx + 2)}
                       className="p:w-full d:w-auto"
                     >
                       <Type
@@ -156,10 +154,10 @@ const Trademark: React.FC = () => {
                     </div>
                   )}
                   <div className="w-[120px]">
-                    {isSelected === idx ? (
+                    {isSelected === idx + 2 ? (
                       <button
                         className="hover:bg-[#bb86fc37] hover:text-[#BB86FC] text-[#74affc] bg-[#74affc43] px-3 py-2 rounded-xl"
-                        onClick={() => HandleUpdate(idx)}
+                        onClick={() => HandleUpdate(idx + 2)}
                       >
                         Cập nhật
                       </button>

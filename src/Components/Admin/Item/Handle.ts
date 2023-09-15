@@ -1,5 +1,6 @@
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getStorage } from "firebase/storage";
+import diacritic from "diacritic";
 
 export const uploadImage = async (fileOrEvent: any, locate: any) => {
   try {
@@ -26,4 +27,9 @@ export const uploadImage = async (fileOrEvent: any, locate: any) => {
     console.error("Error uploading file:", error);
     return null;
   }
+};
+
+export const convertToCodeFormat = (text: string) => {
+  const textWithoutDiacritics = diacritic.clean(text);
+  return textWithoutDiacritics.replace(/\s+/g, "-").toLowerCase();
 };

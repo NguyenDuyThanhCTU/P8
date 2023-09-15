@@ -262,16 +262,41 @@ export const HeaderItems = [
   },
 
   {
-    name: "Tin Tức",
-    link: "tin-tuc",
+    name: "Quy trình sản xuất",
+    link: "quy-trinh-san-xuat",
   },
   {
-    name: "Video",
-    link: "video",
+    name: "Hợp tác",
+    link: "hop-tac",
   },
   {
-    name: "Liên Hệ",
+    name: "Tin tức & Sự kiện",
+    link: "tin-tuc-su-kien",
+  },
+  {
+    name: "Liên hệ",
     link: "lien-he",
+  },
+];
+
+/*<-------------------------------------------------------------------------------------------------------------------- CUSTOM --------------------------------------------------------------------------------------------------------------------> */
+
+export const TypePostItems = [
+  {
+    label: "Tin tức & Sự kiện",
+    value: "news",
+  },
+  {
+    label: "Hợp tác",
+    value: "cooperate",
+  },
+  {
+    label: "Quy trình sản xuất",
+    value: "process",
+  },
+  {
+    label: "Chính sách",
+    value: "policy",
   },
 ];
 
@@ -293,7 +318,4 @@ export const TypeProductItems = [
     value: "girls",
   },
 ];
-
-/*<-------------------------------------------------------------------------------------------------------------------- CUSTOM --------------------------------------------------------------------------------------------------------------------> */
-
 export {};

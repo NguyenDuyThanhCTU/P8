@@ -15,7 +15,7 @@ import {
   addDataToArrayField,
   deleteDataFromArrayField,
 } from "../../../../Config/Services/Firebase/FireStoreDB";
-import diacritic from "diacritic";
+import { convertToCodeFormat } from "../Handle";
 
 const AddChildrenType = () => {
   const [Name, setName] = useState("");
@@ -73,11 +73,6 @@ const AddChildrenType = () => {
         setIsRefetch("deleted");
       }
     );
-  };
-
-  const convertToCodeFormat = (text: string) => {
-    const textWithoutDiacritics = diacritic.clean(text);
-    return textWithoutDiacritics.replace(/\s+/g, "-").toLowerCase();
   };
 
   useEffect(() => {

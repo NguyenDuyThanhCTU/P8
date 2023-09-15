@@ -6,10 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
- font-family: "SVN-Dancing";
- src: url("../public/Fonts/SVN-Dancing.ttf");
-} */
+@font-face {
+ font-family: "UTMAmerican";
+ src: url("../public/UTM American Sans.ttf");
+}
 
 /*<---------------------------------------------------------- Animation ----------------------------------------------------------> */
 .call-animation {

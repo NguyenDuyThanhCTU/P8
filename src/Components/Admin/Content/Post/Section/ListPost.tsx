@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useStateProvider } from "../../../../../Context/StateProvider";
 import { useData } from "../../../../../Context/DataProviders";
 import { FiEdit } from "react-icons/fi";
-import { Popconfirm, message, notification } from "antd";
+import { Divider, Image, Popconfirm, message, notification } from "antd";
 import { MdDeleteForever } from "react-icons/md";
 import { delDocument } from "../../../../../Config/Services/Firebase/FireStoreDB";
 
@@ -10,6 +10,7 @@ interface PostData {
   id: string;
   title: string;
   image: string;
+  type: string;
   daysSinceCreation: number;
 }
 
@@ -54,16 +55,28 @@ const ListPost: React.FC = () => {
 
         {Posts.map((data: PostData, idx: number) => {
           return (
-            <div key={data.id} className="grid grid-cols-4  py-4  items-center">
+            <div key={data.id} className="grid cols-4 py-4   items-center">
               <p>{idx + 1}</p>
 
               <p className="truncate ">{data.title}</p>
 
-              <img
-                src={data.image}
-                alt="product"
-                className="  w-14 h-14 rounded-lg object-cover"
-              />
+              {data.type === "news" ? (
+                <>
+                  {" "}
+                  <Image
+                    className="  w-14 h-14 rounded-lg object-cover"
+                    src={data.image}
+                  />
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <Image
+                    className="  w-14 h-14 rounded-lg object-cover"
+                    src="https://firebasestorage.googleapis.com/v0/b/noithatdaiphattravinh.appspot.com/o/logoSaleNoti.png?alt=media&token=63c66b17-aa49-4c45-ab51-9661eee6ca2f"
+                  />
+                </>
+              )}
 
               <div className="flex gap-5 items-center">
                 <div>

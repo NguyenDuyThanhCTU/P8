@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-import Input from "../../../Item/Input";
+import React, { useEffect, useState } from "react";
+
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { notification } from "antd";
 import { useData } from "../../../../../Context/DataProviders";
 import { useStateProvider } from "../../../../../Context/StateProvider";
 import { addDocument } from "../../../../../Config/Services/Firebase/FireStoreDB";
-import { uploadImage } from "../../../Item/Handle";
+import { convertToCodeFormat, uploadImage } from "../../../Item/Handle";
+import { TypePostItems } from "../../../../../Utils/item";
+import TextArea from "antd/es/input/TextArea";
+import Input from "../../../Item/Input";
 
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const UploadPost: React.FC = () => {
   const [Title, setTitle] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
-
+  const [type, setType] = useState<string>("news");
+  const [url, setUrl] = useState<string>("");
   const { setDropDown, setIsRefetch } = useStateProvider();
   const { setUpdateId } = useData();
 
@@ -27,8 +31,19 @@ const UploadPost: React.FC = () => {
     setTitle("");
   };
 
+  useEffect(() => {
+    const handleChange = () => {
+      const userInput = Title;
+      const formattedCode = convertToCodeFormat(userInput);
+      if (formattedCode) {
+        setUrl(formattedCode);
+      }
+    };
+    handleChange();
+  }, [Title]);
+
   const HandleContinue = (): void => {
-    if (!Title || !imageUrl) {
+    if (!Title) {
       notification.error({
         message: "Lỗi !",
         description: `Vui lòng nhập thông tin trước khi THÊM NỘI DUNG !`,
@@ -37,6 +52,8 @@ const UploadPost: React.FC = () => {
       const data = {
         title: Title,
         image: imageUrl,
+        type: type,
+        url: url,
         content: "",
       };
       addDocument("posts", data).then((data) => {
@@ -82,35 +99,57 @@ const UploadPost: React.FC = () => {
               Input={true}
               PlaceHolder=""
             />
-            <div className="flex gap-5  items-end ">
-              <Input
-                text="Liên kết hình ảnh"
-                Value={imageUrl}
-                setValue={setImageUrl}
-                Input={true}
-                PlaceHolder=""
-              />
-
-              <div>
-                <label>
-                  <div className="cursor-pointer">
-                    <div className="flex gap-1 items-center p-2 px-4 bg-red-500 hover:bg-red-600 border text-white rounded-full">
-                      <AiOutlineCloudUpload className="text-[32px] " />
-                    </div>
-
-                    <input
-                      type="file"
-                      className="w-0 h-0"
-                      onChange={(e) => HandleUploadImage(e, "posts")}
-                    />
-                  </div>
-                </label>
-              </div>
+            <div className="flex flex-col gap-2 mb-2">
+              <label className="text-md font-medium ">Loại bài viết:</label>
+              <select
+                className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
+                onChange={(e) => setType(e.target.value)}
+              >
+                {TypePostItems.map((item, idx) => (
+                  <option
+                    key={idx}
+                    className=" outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
+                    value={item.value}
+                  >
+                    {item.label}
+                  </option>
+                ))}
+              </select>
             </div>
+            {type !== "policy" && (
+              <>
+                {" "}
+                <div className="flex gap-5  items-end ">
+                  <Input
+                    text="Liên kết hình ảnh"
+                    Value={imageUrl}
+                    setValue={setImageUrl}
+                    Input={true}
+                    PlaceHolder=""
+                  />
+
+                  <div>
+                    <label>
+                      <div className="cursor-pointer">
+                        <div className="flex gap-1 items-center p-2 px-4 bg-red-500 hover:bg-red-600 border text-white rounded-full">
+                          <AiOutlineCloudUpload className="text-[32px] " />
+                        </div>
+
+                        <input
+                          type="file"
+                          className="w-0 h-0"
+                          onChange={(e) => HandleUploadImage(e, "posts")}
+                        />
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        <div className="flex gap-5">
+        <div className="flex gap-5 mt-2">
           <>
             <div
               className="px-10 py-3 rounded-xl border-2 border-blue-400 text-blue-400 hover:text-blue-700 hover:border-blue-700 duration-300 cursor-pointer"
@@ -118,7 +157,7 @@ const UploadPost: React.FC = () => {
             >
               Nhập lại
             </div>
-            {imageUrl ? (
+            {imageUrl || type === "policy" ? (
               <div
                 className="px-10 py-3 rounded-xl border-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-700 duration-300 hover:border-blue-700 cursor-pointer"
                 onClick={() => HandleContinue()}

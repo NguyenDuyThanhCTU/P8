@@ -9,15 +9,19 @@ const Products: React.FC = () => {
   const { id } = useParams();
 
   //if id is not null, filter field : childrenUrl, parentUrl and typeUrl in product by id
+
   useEffect(() => {
     if (id) {
       const sortParent = Products?.filter(
         (items: any) => items.parentUrl === id
       );
+
       const sortChildren = Products?.filter(
         (items: any) => items.childrenUrl === id
       );
       const sortType = Products?.filter((items: any) => items.typeUrl === id);
+
+      console.log(sortParent.length, sortChildren.length, sortType.length, id);
       if (sortParent.length > 0) {
         setProduct(sortParent);
         setNavigateUrl("parent");
@@ -32,7 +36,7 @@ const Products: React.FC = () => {
       setProduct(Products);
     }
   }, [id, Products]);
-
+  console.log(product);
   return (
     <>
       <div className="my-16 w-[1300px] mx-auto">
@@ -40,7 +44,7 @@ const Products: React.FC = () => {
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit.png)] h-4 w-[83px] bg-cover bg-no-repeat"></div>
           <h3 className="text-mainred text-[30px] uppercase leading-10 font-UTMAmerican font-bold">
             {product.length > 0 && (
-              <>{id ? Products[0][navigateUrl] : "Sản phẩm"}</>
+              <>{id ? product[0][navigateUrl] : "Sản phẩm"}</>
             )}
           </h3>
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit1.png)] h-4 w-[86px] bg-cover bg-no-repeat"></div>

@@ -151,43 +151,120 @@ const Header: React.FC = () => {
                             <AiFillCaretRight className="group-hover/main:rotate-90 duration-500" />
                           )}
                         </div>
-
                         {items.name === "Sản phẩm" && (
-                          <div className="group-hover/main:block hidden relative z-20">
-                            <div className="absolute h-10 w-full bg-none"></div>
-                            <div className="  absolute  mt-5 w-[340px] max-h-[300px]  shadow-xl rounded-b-lg bg-white  overflow-y-auto overflow-x-visible">
+                          <div className="group-hover/main:block hidden absolute left-0 mt-5 w-max bg-mainred  border   shadow-lg  rounded-b-sm  z-50">
+                            <div className="absolute h-6 w-full bg-none -top-6"></div>
+                            <div className="">
                               {TypeProductItems.map(
                                 (items: any, idx: number) => {
                                   const sort = productTypes.filter(
                                     (item: any) =>
                                       item.parentUrl === items.value
                                   );
+
                                   return (
-                                    <div key={idx} className="relative">
-                                      <div className="w-full group/level1  ">
-                                        <div className="py-4 px-8 font-light text-black group duration-300 hover:text-mainred hover:bg-mainpink flex justify-between items-center w-full">
-                                          <Link
-                                            to={`${`/san-pham/${items.value}`}`}
-                                          >
-                                            <span>{items.label}</span>
-                                          </Link>
-                                          {sort.length > 0 && (
-                                            <AiFillCaretRight
-                                              className={` rotate-90 group-hover/level1:rotate-0 duration-500 text-black`}
-                                            />
-                                          )}
-                                        </div>
-                                      </div>
+                                    <div className=" group/lv1   hover:bg-[#bf0000] relative py-4 px-6 font-light text-white group duration-300 hover:bg-mainpink flex justify-between items-center w-full gap-3 border-b">
+                                      <Link
+                                        to={`${`/san-pham/${items.value}`}`}
+                                      >
+                                        <span>{items.label}</span>
+                                      </Link>
+                                      {sort.length > 0 && (
+                                        <>
+                                          <AiFillCaretRight
+                                            className={` rotate-90 group-hover/lv1:rotate-0 duration-500 text-white`}
+                                          />
+                                          <div className="hidden group-hover/lv1:block absolute top-0 left-full mt-0 w-max bg-mainred  shadow-lg">
+                                            <div className="">
+                                              {sort.map((items: any) => (
+                                                <>
+                                                  <div className=" group/lv2 hover:bg-[#bf0000] relative py-4 px-6 font-light text-white group duration-300  hover:bg-mainpink flex justify-between items-center w-full gap-3 border-b  ">
+                                                    <Link
+                                                      to={`${`/san-pham/${items.typeUrl}`}`}
+                                                    >
+                                                      <span>{items.type}</span>
+                                                    </Link>
+                                                    {items.children.length >
+                                                      0 && (
+                                                      <>
+                                                        <AiFillCaretRight
+                                                          className={` rotate-90 group-hover/lv2:rotate-0 duration-500 text-white`}
+                                                        />
+                                                        <div className="hidden group-hover/lv2:block absolute top-0 left-full mt-0 w-max bg-mainred  shadow-lg">
+                                                          <div className="">
+                                                            {items.children.map(
+                                                              (items: any) => (
+                                                                <>
+                                                                  <div className=" group/lv2 hover:bg-[#bf0000] relative py-4 px-6 font-light text-white group duration-300  hover:bg-mainpink flex justify-between items-center w-full gap-3 border-b">
+                                                                    <Link
+                                                                      to={`${`/san-pham/${items.childrenUrl}`}`}
+                                                                    >
+                                                                      <span>
+                                                                        {
+                                                                          items.children
+                                                                        }
+                                                                      </span>
+                                                                    </Link>
+                                                                  </div>
+                                                                </>
+                                                              )
+                                                            )}
+                                                          </div>
+                                                        </div>
+                                                      </>
+                                                    )}
+                                                  </div>
+                                                </>
+                                              ))}
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
                                     </div>
                                   );
                                 }
                               )}
                             </div>
-                            <div className="relative">
-                              <div className="absolute w-20 h-20 bg-red-500 -left-6"></div>
-                            </div>
                           </div>
                         )}
+                        {/* {items.name === "Sản phẩm" && (
+                          <div className="group-hover/main:block hidden relative z-20">
+                            <div className="absolute h-10 w-full bg-none"></div>
+                            <div className="  absolute  mt-5 w-full max-h-[300px]  shadow-xl rounded-b-lg bg-white  overflow-y-auto overflow-x-visible">
+                              <div>
+                                {TypeProductItems.map(
+                                  (items: any, idx: number) => {
+                                    const sort = productTypes.filter(
+                                      (item: any) =>
+                                        item.parentUrl === items.value
+                                    );
+                                    return (
+                                      <div key={idx} className="relative">
+                                        <div className="w-full group/level1  ">
+                                          <div className="py-4 px-8 font-light text-black group duration-300 hover:text-mainred hover:bg-mainpink flex justify-between items-center w-full">
+                                            <Link
+                                              to={`${`/san-pham/${items.value}`}`}
+                                            >
+                                              <span>{items.label}</span>
+                                            </Link>
+                                            {sort.length > 0 && (
+                                              <AiFillCaretRight
+                                                className={` rotate-90 group-hover/level1:rotate-0 duration-500 text-black`}
+                                              />
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                )}
+                              </div>
+                            </div>
+                            <div className="relative">
+                              <div className="absolute w-20 h-20 bg-red-500 right-0"></div>
+                            </div>
+                          </div>
+                        )} */}
                         {/*  */}
                       </div>
                     </Link>

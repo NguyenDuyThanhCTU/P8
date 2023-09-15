@@ -6,10 +6,7 @@ import { TypeProductItems } from "../../../../../../Utils/item";
 const ListProduct: React.FC = () => {
   const { setDropDown } = useStateProvider();
   const { productTypes } = useData();
-  const children = productTypes.filter(
-    (data: any) => data.parentName === "Girls"
-  );
-  console.log(children);
+
   return (
     <div className="d:w-[400px] shadow-2xl bg-[#353535] p:w-auto">
       <div className="p-3">

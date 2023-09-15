@@ -302,7 +302,7 @@ export const TypePostItems = [
 
 export const TypeProductItems = [
   {
-    label: "Hộp quà - giỏ quà",
+    label: "Hộp quà-giỏ quà",
     value: "hop-qua-gio-qua",
   },
   {

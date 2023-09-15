@@ -23,7 +23,7 @@ const AddProduct = ({}) => {
   const [Content, setContent] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
   const [isType, setIsType] = useState<any>();
-  const [isParent, setIsParent] = useState("Hộp quà - giỏ quà");
+  const [isParent, setIsParent] = useState("Hộp quà-giỏ quà");
   const [isChildren, setIsChildren] = useState<any>();
   const [typeUrl, setTypeUrl] = useState<string | undefined>();
   const [parentUrl, setParentUrl] = useState<string | undefined>();
@@ -42,17 +42,20 @@ const AddProduct = ({}) => {
   //convert to url,ex: "Hộp quà - giỏ quà" => "hop-qua-gio-qua"
   useEffect(() => {
     const handleChange = () => {
-      const formattedInput = convertToCodeFormat(
-        isType || isParent || isChildren
-      );
-
-      if (formattedInput) {
-        if (isType) setTypeUrl(formattedInput);
-        if (isParent) setParentUrl(formattedInput);
-        if (isChildren) setChildrenUrl(formattedInput);
+      const formattedType = convertToCodeFormat(isType);
+      const formattedParent = convertToCodeFormat(isParent);
+      const formattedChildren = convertToCodeFormat(isChildren);
+      console.log(formattedType);
+      if (formattedType) {
+        setTypeUrl(formattedType);
+      }
+      if (formattedParent) {
+        setParentUrl(formattedParent);
+      }
+      if (formattedChildren) {
+        setChildrenUrl(formattedChildren);
       }
     };
-
     handleChange();
   }, [isType, isParent, isChildren]);
 
@@ -99,7 +102,7 @@ const AddProduct = ({}) => {
           delete data[key];
         }
       }
-
+      console.log(data);
       addDocument("products", data).then(() => {
         notification["success"]({
           message: "Tải lên thành công!",
@@ -131,15 +134,6 @@ const AddProduct = ({}) => {
       );
     }
   };
-
-  useEffect(() => {
-    const sort = productTypes?.filter(
-      (item: any) => item.parentName === isParent
-    );
-    if (sort) {
-      setIsType(sort[0]?.name);
-    }
-  }, [isParent]);
 
   return (
     <div
@@ -247,24 +241,20 @@ const AddProduct = ({}) => {
                         <label className="text-md font-medium ">
                           Loại bài viết
                         </label>
-                        <select
-                          className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
-                          onChange={(e) => setIsType(e.target.value)}
+                        <Select
+                          style={{ width: "100%" }}
+                          placeholder="Chọn loại bài viết"
+                          onChange={setIsType}
+                          optionLabelProp="label"
                         >
                           {productTypes
-                            ?.filter(
-                              (item: any) => item.parentName === isParent
-                            )
+                            ?.filter((item: any) => item.parent === isParent)
                             .map((item: any, idx: any) => (
-                              <option
-                                key={idx}
-                                className=" outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
-                                value={item.name}
-                              >
-                                {item.name}
-                              </option>
+                              <Option value={item.type} label={item.type}>
+                                <Space>{item.type}</Space>
+                              </Option>
                             ))}
-                        </select>
+                        </Select>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 w-full">
@@ -279,12 +269,15 @@ const AddProduct = ({}) => {
                         optionLabelProp="label"
                       >
                         {productTypes
-                          ?.filter((item: any) => item.name === isType)
+                          ?.filter((item: any) => item.type === isType)
                           .map((item: any, idx: any) => (
                             <>
                               {item.children.map((items: any, idx: number) => (
-                                <Option value={items.name} label={items.name}>
-                                  <Space>{items.name}</Space>
+                                <Option
+                                  value={items.children}
+                                  label={items.children}
+                                >
+                                  <Space>{items.children}</Space>
                                 </Option>
                               ))}
                             </>

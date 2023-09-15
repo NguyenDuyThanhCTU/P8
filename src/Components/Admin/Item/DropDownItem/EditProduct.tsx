@@ -12,7 +12,7 @@ import Input from "../Input";
 import { useStateProvider } from "../../../../Context/StateProvider";
 import { useData } from "../../../../Context/DataProviders";
 import { TypeProductItems } from "../../../../Utils/item";
-import { uploadImage } from "../Handle";
+import { convertToCodeFormat, uploadImage } from "../Handle";
 import {
   addDocument,
   updateDocument,
@@ -24,18 +24,25 @@ const AddProduct = ({}) => {
   const [Title, setTitle] = useState<string | undefined>();
   const [Price, setPrice] = useState<string | undefined>();
   const [Content, setContent] = useState<string | undefined>();
-  const [isType, setIsType] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
-  const [isParent, setIsParent] = useState("");
-  const [isChildren, setIsChildren] = useState<any>([]);
+  const [isType, setIsType] = useState<any>();
+  const [isParent, setIsParent] = useState("Hộp quà-giỏ quà");
+  const [isChildren, setIsChildren] = useState<any>();
+  const [typeUrl, setTypeUrl] = useState<string | undefined>();
+  const [parentUrl, setParentUrl] = useState<string | undefined>();
+  const [childrenUrl, setChildrenUrl] = useState<string | undefined>();
   const [ListSubImage, setListSubImage] = useState<any>([]);
-  const [ProductData, setProductData] = useState<any>([]);
+  const [value, setValue] = useState();
   const { setDropDown, setIsRefetch } = useStateProvider();
-  const { productTypes, Products, UpdateId } = useData();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(1);
   const [openDescription, setOpenDescription] = useState(false);
+  const [ProductData, setProductData] = useState<any>();
   const { Option } = Select;
+  const { productTypes, Products, UpdateId } = useData();
+
+  const initial1 =
+    "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
+  const initDescribe = "<p> mô tả sản phẩm </p>";
 
   useEffect(() => {
     const sort = Products.filter((item: any) => item.id === UpdateId);
@@ -43,22 +50,40 @@ const AddProduct = ({}) => {
       setProductData(sort[0]);
     }
   }, [UpdateId, Products]);
-  const handleChange = (value: string[]) => {
-    setIsChildren(value);
-  };
+
+  useEffect(() => {
+    const handleChange = () => {
+      const formattedType = convertToCodeFormat(isType);
+      const formattedParent = convertToCodeFormat(isParent);
+      const formattedChildren = convertToCodeFormat(isChildren);
+      console.log(formattedType);
+      if (formattedType) {
+        setTypeUrl(formattedType);
+      }
+      if (formattedParent) {
+        setParentUrl(formattedParent);
+      }
+      if (formattedChildren) {
+        setChildrenUrl(formattedChildren);
+      }
+    };
+    handleChange();
+  }, [isType, isParent, isChildren]);
 
   const handleDiscard = () => {
-    setDropDown("");
     setTitle("");
     setPrice("");
-    setImageUrl("");
     setContent("");
     setDescribe("");
-    setListSubImage("");
+    setIsType("");
+    setIsParent("");
+    setIsChildren("");
+    setTypeUrl("");
+    setParentUrl("");
+    setChildrenUrl("");
+    setListSubImage([]);
+    setImageUrl("");
   };
-  const initial1 =
-    "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
-  const initDescribe = "<p> mô tả sản phẩm </p>";
 
   const HandleSubmit = () => {
     const data: any = {
@@ -68,10 +93,14 @@ const AddProduct = ({}) => {
       price: Price,
       image: imageUrl,
       type: isType,
+      typeUrl: typeUrl,
       parent: isParent,
+      parentUrl: parentUrl,
+      state: value,
+
       subimage: ListSubImage,
       children: isChildren,
-      state: value,
+      childrenUrl: childrenUrl,
     };
 
     for (let key in data) {
@@ -84,6 +113,7 @@ const AddProduct = ({}) => {
         delete data[key];
       }
     }
+
     updateDocument("products", UpdateId, data).then(() => {
       notification["success"]({
         message: "Thành công!",
@@ -114,15 +144,6 @@ const AddProduct = ({}) => {
       );
     }
   };
-
-  useEffect(() => {
-    const sort = productTypes?.filter(
-      (item: any) => item.parentName === isParent
-    );
-    if (sort.length > 0) {
-      setIsType(sort[0].name);
-    }
-  }, [isParent]);
 
   return (
     <div className="font-LexendDeca">
@@ -266,41 +287,41 @@ const AddProduct = ({}) => {
                     <label className="text-md font-medium ">
                       Loại bài viết
                     </label>
-                    <select
-                      className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
-                      onChange={(e) => setIsType(e.target.value)}
+                    <Select
+                      style={{ width: "100%" }}
+                      placeholder="Chọn loại bài viết"
+                      onChange={setIsType}
+                      optionLabelProp="label"
                     >
                       {productTypes
-                        ?.filter((item: any) => item.parentName === isParent)
+                        ?.filter((item: any) => item.parent === isParent)
                         .map((item: any, idx: any) => (
-                          <option
-                            key={idx}
-                            className=" outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
-                            value={item.name}
-                          >
-                            {item.name}
-                          </option>
+                          <Option value={item.type} label={item.type}>
+                            <Space>{item.type}</Space>
+                          </Option>
                         ))}
-                    </select>
+                    </Select>
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-md font-medium ">Loại bài viết</label>
 
                   <Select
-                    mode="multiple"
                     style={{ width: "100%" }}
                     placeholder="Chọn loại bài viết"
-                    onChange={handleChange}
+                    onChange={setIsChildren}
                     optionLabelProp="label"
                   >
                     {productTypes
-                      ?.filter((item: any) => item.name === isType)
+                      ?.filter((item: any) => item.type === isType)
                       .map((item: any, idx: any) => (
                         <>
                           {item.children.map((items: any, idx: number) => (
-                            <Option value={items.name} label={items.name}>
-                              <Space>{items.name}</Space>
+                            <Option
+                              value={items.children}
+                              label={items.children}
+                            >
+                              <Space>{items.children}</Space>
                             </Option>
                           ))}
                         </>
@@ -350,7 +371,12 @@ const AddProduct = ({}) => {
           open={open}
           width={800}
         >
-          <TextEditor onChange={setContent} initialValue={initial1} />
+          <TextEditor
+            onChange={setContent}
+            initialValue={
+              ProductData?.content ? ProductData?.content : initial1
+            }
+          />
         </Drawer>
       </>
       <>
@@ -361,7 +387,12 @@ const AddProduct = ({}) => {
           open={openDescription}
           width={800}
         >
-          <TextEditor onChange={setDescribe} initialValue={initDescribe} />
+          <TextEditor
+            onChange={setDescribe}
+            initialValue={
+              ProductData?.describe ? ProductData?.describe : initDescribe
+            }
+          />
         </Drawer>
       </>
     </div>

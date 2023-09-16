@@ -11,6 +11,12 @@
  src: url("../public/UTM American Sans.ttf");
 }
 
+@font-face {
+  font-family: "UTMFleur";
+  src: url("../public/UTM Fleur.ttf");
+ }
+
+
 /*<---------------------------------------------------------- Animation ----------------------------------------------------------> */
 .call-animation {
   padding: 10px;

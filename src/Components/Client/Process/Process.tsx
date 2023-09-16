@@ -12,6 +12,7 @@ const Process: React.FC = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
   useEffect(() => {
     setCurrentItems(
       Posts.filter((items: any) => items.type === "process").slice(
@@ -27,15 +28,15 @@ const Process: React.FC = () => {
 
   return (
     <div>
-      <div className="my-16 w-[1300px] mx-auto">
+      <div className="my-16 d:w-[1300px] d:mx-auto p:w-auto p:mx-2">
         <div className="h-10 flex  justify-center items-center gap-5">
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit.png)] h-4 w-[83px] bg-cover bg-no-repeat"></div>
-          <h3 className="text-mainred text-[30px] uppercase leading-10 font-UTMAmerican font-bold">
+          <h3 className="text-mainred p:text-[20px] d:text-[30px] uppercase leading-10 font-UTMAmerican font-bold">
             Quy trình sản xuất
           </h3>
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit1.png)] h-4 w-[86px] bg-cover bg-no-repeat"></div>
         </div>
-        <div className="grid grid-cols-3 gap-2 py-5">
+        <div className="grid p:grid-cols-1 px-2 d:grid-cols-3 gap-2 py-5">
           {currentItems.map((items: any) => {
             const timestamp = items.createdAt.toDate();
 

@@ -15,7 +15,8 @@ module.exports = {
         LexendDeca: ["Lexend Deca", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
         //custom font
-        UTMAmerican: ["UTM American Sans", "sans-serif"],
+        UTMAmerican: ["UTMAmerican", "sans-serif"],
+        UTMFleur: ["UTMFleur", "sans-serif"],
       },
       colors: {
         //system colors

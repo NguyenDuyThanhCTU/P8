@@ -4,7 +4,7 @@ import { useData } from "../../../Context/DataProviders";
 import { IconMapping, SocialMediaCustom } from "../../../Utils/item";
 
 import { notification } from "antd";
-import Input from "./Item/Input";
+import Input from "../Item/Input";
 
 const Contact: React.FC = () => {
   const { ContactData, SocialMedia } = useData();

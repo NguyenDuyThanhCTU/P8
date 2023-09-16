@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
 
   return (
     <div className="bg-[url(https://yensaotrison.com/upload/hinhanh/bg-ft-3451_1366x390.jpg)]">
-      <div className="w-[1300px] mx-auto py-10 grid grid-cols-3 text-white font-UTMAmerican">
+      <div className="w-[1300px] mx-auto py-10 grid p:grid-cols-1 d:grid-cols-3  text-white font-UTMAmerican p-2 gap-5">
         <div>
           <h3 className="text-mainyellow text-[30px] uppercase font-bold leading-10 ">
             {TradeMarkData.websiteName}

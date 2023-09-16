@@ -27,7 +27,7 @@ const Cooperate: React.FC = () => {
 
   return (
     <div>
-      <div className="my-16 w-[1300px] mx-auto">
+      <div className="my-16 d:w-[1300px] d:mx-auto p:w-auto p:mx-2">
         <div className="h-10 flex  justify-center items-center gap-5">
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit.png)] h-4 w-[83px] bg-cover bg-no-repeat"></div>
           <h3 className="text-mainred text-[30px] uppercase leading-10 font-UTMAmerican font-bold">
@@ -35,7 +35,7 @@ const Cooperate: React.FC = () => {
           </h3>
           <div className="bg-[url(https://yensaotrison.com/images/bg_tit1.png)] h-4 w-[86px] bg-cover bg-no-repeat"></div>
         </div>
-        <div className="grid grid-cols-3 gap-2 py-5">
+        <div className="grid d:grid-cols-3 gap-2 py-5 p:grid-cols-1">
           {currentItems.map((items: any) => {
             const timestamp = items.createdAt.toDate();
 

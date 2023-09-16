@@ -15,10 +15,12 @@ import { TypeProductItems } from "../../../../Utils/item";
 import { convertToCodeFormat, uploadImage } from "../Handle";
 import { addDocument } from "../../../../Config/Services/Firebase/FireStoreDB";
 import TextEditor from "../../../Item/TextEditor";
+import { title } from "process";
 
 const AddProduct = ({}) => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
-  const [Title, setTitle] = useState<string | undefined>();
+  const [Title, setTitle] = useState<any>();
+  const [titleUrl, setTitleUrl] = useState<string | undefined>();
   const [Price, setPrice] = useState<string | undefined>();
   const [Content, setContent] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
@@ -45,7 +47,7 @@ const AddProduct = ({}) => {
       const formattedType = convertToCodeFormat(isType);
       const formattedParent = convertToCodeFormat(isParent);
       const formattedChildren = convertToCodeFormat(isChildren);
-      console.log(formattedType);
+      const formattedTitle = convertToCodeFormat(Title);
       if (formattedType) {
         setTypeUrl(formattedType);
       }
@@ -55,18 +57,27 @@ const AddProduct = ({}) => {
       if (formattedChildren) {
         setChildrenUrl(formattedChildren);
       }
+      if (formattedTitle) {
+        setTitleUrl(formattedTitle);
+      }
     };
     handleChange();
-  }, [isType, isParent, isChildren]);
+  }, [isType, isParent, isChildren, Title]);
 
   const handleDiscard = () => {
-    setDropDown("");
     setTitle("");
+    setTitleUrl("");
     setPrice("");
-    setImageUrl("");
     setContent("");
     setDescribe("");
-    setListSubImage("");
+    setIsType("");
+    setIsParent("");
+    setIsChildren("");
+    setTypeUrl("");
+    setParentUrl("");
+    setChildrenUrl("");
+    setListSubImage([]);
+    setImageUrl("");
   };
 
   const HandleSubmit = () => {
@@ -87,6 +98,7 @@ const AddProduct = ({}) => {
         parent: isParent,
         parentUrl: parentUrl,
         state: "Còn hàng",
+        url: titleUrl,
         sale: {
           discount: 0,
           newPrice: "0.000",

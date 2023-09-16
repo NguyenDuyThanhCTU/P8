@@ -21,7 +21,9 @@ import TextEditor from "../../../Item/TextEditor";
 
 const AddProduct = ({}) => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
-  const [Title, setTitle] = useState<string | undefined>();
+  const [Title, setTitle] = useState<any>();
+  const [titleUrl, setTitleUrl] = useState<any>();
+
   const [Price, setPrice] = useState<string | undefined>();
   const [Content, setContent] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
@@ -56,7 +58,8 @@ const AddProduct = ({}) => {
       const formattedType = convertToCodeFormat(isType);
       const formattedParent = convertToCodeFormat(isParent);
       const formattedChildren = convertToCodeFormat(isChildren);
-      console.log(formattedType);
+      const formattedTitle = convertToCodeFormat(Title);
+
       if (formattedType) {
         setTypeUrl(formattedType);
       }
@@ -66,12 +69,16 @@ const AddProduct = ({}) => {
       if (formattedChildren) {
         setChildrenUrl(formattedChildren);
       }
+      if (formattedTitle) {
+        setTitleUrl(formattedTitle);
+      }
     };
     handleChange();
-  }, [isType, isParent, isChildren]);
+  }, [isType, isParent, isChildren, Title]);
 
   const handleDiscard = () => {
     setTitle("");
+
     setPrice("");
     setContent("");
     setDescribe("");
@@ -97,7 +104,7 @@ const AddProduct = ({}) => {
       parent: isParent,
       parentUrl: parentUrl,
       state: value,
-
+      url: titleUrl,
       subimage: ListSubImage,
       children: isChildren,
       childrenUrl: childrenUrl,

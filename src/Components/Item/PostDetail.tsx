@@ -31,8 +31,8 @@ const PostDetail: React.FC = () => {
 
   return (
     <>
-      <div className=" flex py-16 font-Montserrat w-[1300px] mx-auto">
-        <div className="  w-full d:block p:hidden  ">
+      <div className=" flex  font-Montserrat my-16 d:w-[1300px] d:mx-auto p:w-auto p:mx-2 d:flex-row p:flex-col">
+        <div className="  w-full   ">
           <div className=" mx-auto w-[90%]">
             <div className=" pb-5 border-b flex flex-col gap-4">
               <h3 className="text-[#333333] text-[34px] font-normal">

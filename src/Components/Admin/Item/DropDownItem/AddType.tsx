@@ -15,9 +15,8 @@ import {
 } from "../../../../Config/Services/Firebase/FireStoreDB";
 import { TypeProductItems } from "../../../../Utils/item";
 
-import { convertToCodeFormat, uploadImage } from "../Handle";
-
 import Table from "../Table";
+import { convertToCodeFormat } from "../../../Item/Handle";
 
 type ChangeEventType = React.ChangeEvent<HTMLInputElement>;
 

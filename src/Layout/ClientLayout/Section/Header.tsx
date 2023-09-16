@@ -163,47 +163,58 @@ const Header: React.FC = () => {
                                   );
 
                                   return (
-                                    <div className=" group/lv1   hover:bg-[#bf0000] relative py-4 px-6 font-light text-white group duration-300 hover:bg-mainpink flex justify-between items-center w-full gap-3 border-b">
+                                    <div className=" group/lv1    relative font-light text-white    border-b">
                                       <Link
                                         to={`${`/san-pham/${items.value}`}`}
                                       >
-                                        <span>{items.label}</span>
+                                        <div className="hover:bg-[#bf0000] py-4 px-6 duration-300 flex justify-between items-center  w-full gap-3">
+                                          <p>{items.label}</p>
+                                          {sort.length > 0 && (
+                                            <AiFillCaretRight
+                                              className={` rotate-90 group-hover/lv1:rotate-0 duration-500 text-white`}
+                                            />
+                                          )}
+                                        </div>
                                       </Link>
+
                                       {sort.length > 0 && (
                                         <>
-                                          <AiFillCaretRight
-                                            className={` rotate-90 group-hover/lv1:rotate-0 duration-500 text-white`}
-                                          />
                                           <div className="hidden group-hover/lv1:block absolute top-0 left-full mt-0 w-max bg-mainred  shadow-lg">
                                             <div className="">
                                               {sort.map((items: any) => (
                                                 <>
-                                                  <div className=" group/lv2 hover:bg-[#bf0000] relative py-4 px-6 font-light text-white group duration-300  hover:bg-mainpink flex justify-between items-center w-full gap-3 border-b  ">
+                                                  <div className=" group/lv2    relative font-light text-white    border-b">
                                                     <Link
                                                       to={`${`/san-pham/${items.typeUrl}`}`}
                                                     >
-                                                      <span>{items.type}</span>
+                                                      <div className="hover:bg-[#bf0000] py-4 px-6 duration-300 flex justify-between items-center  w-full gap-3">
+                                                        <p>{items.type}</p>
+                                                        {sort.length > 0 && (
+                                                          <AiFillCaretRight
+                                                            className={` rotate-90 group-hover/lv1:rotate-0 duration-500 text-white`}
+                                                          />
+                                                        )}
+                                                      </div>
                                                     </Link>
                                                     {items.children.length >
                                                       0 && (
                                                       <>
-                                                        <AiFillCaretRight
-                                                          className={` rotate-90 group-hover/lv2:rotate-0 duration-500 text-white`}
-                                                        />
                                                         <div className="hidden group-hover/lv2:block absolute top-0 left-full mt-0 w-max bg-mainred  shadow-lg">
                                                           <div className="">
                                                             {items.children.map(
                                                               (items: any) => (
                                                                 <>
-                                                                  <div className=" group/lv2 hover:bg-[#bf0000] relative py-4 px-6 font-light text-white group duration-300  hover:bg-mainpink flex justify-between items-center w-full gap-3 border-b">
+                                                                  <div className=" group/lv2    relative font-light text-white    border-b">
                                                                     <Link
                                                                       to={`${`/san-pham/${items.childrenUrl}`}`}
                                                                     >
-                                                                      <span>
-                                                                        {
-                                                                          items.children
-                                                                        }
-                                                                      </span>
+                                                                      <div className="hover:bg-[#bf0000] py-4 px-6 duration-300 flex justify-between items-center  w-full gap-3">
+                                                                        <p>
+                                                                          {
+                                                                            items.children
+                                                                          }
+                                                                        </p>
+                                                                      </div>
                                                                     </Link>
                                                                   </div>
                                                                 </>
@@ -227,45 +238,6 @@ const Header: React.FC = () => {
                             </div>
                           </div>
                         )}
-                        {/* {items.name === "Sản phẩm" && (
-                          <div className="group-hover/main:block hidden relative z-20">
-                            <div className="absolute h-10 w-full bg-none"></div>
-                            <div className="  absolute  mt-5 w-full max-h-[300px]  shadow-xl rounded-b-lg bg-white  overflow-y-auto overflow-x-visible">
-                              <div>
-                                {TypeProductItems.map(
-                                  (items: any, idx: number) => {
-                                    const sort = productTypes.filter(
-                                      (item: any) =>
-                                        item.parentUrl === items.value
-                                    );
-                                    return (
-                                      <div key={idx} className="relative">
-                                        <div className="w-full group/level1  ">
-                                          <div className="py-4 px-8 font-light text-black group duration-300 hover:text-mainred hover:bg-mainpink flex justify-between items-center w-full">
-                                            <Link
-                                              to={`${`/san-pham/${items.value}`}`}
-                                            >
-                                              <span>{items.label}</span>
-                                            </Link>
-                                            {sort.length > 0 && (
-                                              <AiFillCaretRight
-                                                className={` rotate-90 group-hover/level1:rotate-0 duration-500 text-black`}
-                                              />
-                                            )}
-                                          </div>
-                                        </div>
-                                      </div>
-                                    );
-                                  }
-                                )}
-                              </div>
-                            </div>
-                            <div className="relative">
-                              <div className="absolute w-20 h-20 bg-red-500 right-0"></div>
-                            </div>
-                          </div>
-                        )} */}
-                        {/*  */}
                       </div>
                     </Link>
                     <div
@@ -314,7 +286,7 @@ const Header: React.FC = () => {
             >
               {HeaderItems.map((items: any, idx: any) => {
                 const sort = productTypes.filter(
-                  (item: any) => item.parentParams === items.link
+                  (item: any) => item.parent === items.link
                 );
 
                 return (

@@ -3,7 +3,7 @@ import { useData } from "../../../../../Context/DataProviders";
 import { notification } from "antd";
 import { useStateProvider } from "../../../../../Context/StateProvider";
 import { updateDocument } from "../../../../../Config/Services/Firebase/FireStoreDB";
-import { uploadImage } from "../../../Item/Handle";
+import { uploadImage } from "../../../../Item/Handle";
 
 type TrademarkItem = {
   name: string;

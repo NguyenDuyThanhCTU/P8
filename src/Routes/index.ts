@@ -1,10 +1,8 @@
 import Admin from "../Components/Admin/Admin";
 import Contact from "../Components/Client/Contact/Contact";
-import Cooperate from "../Components/Client/Cooperate/Cooperate";
 import Home from "../Components/Client/Home/Home";
 import Introduction from "../Components/Client/Introduction/Introduction";
 import News from "../Components/Client/News/News";
-import Process from "../Components/Client/Process/Process";
 import ProductDetail from "../Components/Client/Products/ProductDetail";
 import Products from "../Components/Client/Products/Products";
 
@@ -36,7 +34,7 @@ export const AllRoutes = [
     Layout: ClientLayout,
   },
   {
-    path: "/tin-tuc-su-kien",
+    path: "/:id",
     component: News,
     Layout: ClientLayout,
   },
@@ -56,13 +54,13 @@ export const AllRoutes = [
     Layout: ClientLayout,
   },
   {
-    path: "/hop-tac/",
-    component: Cooperate,
+    path: "/:id/",
+    component: News,
     Layout: ClientLayout,
   },
   {
-    path: "/quy-trinh-san-xuat/",
-    component: Process,
+    path: "/:id",
+    component: News,
     Layout: ClientLayout,
   },
   {

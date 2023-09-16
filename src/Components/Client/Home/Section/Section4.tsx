@@ -7,14 +7,17 @@ import "swiper/css/effect-coverflow";
 import { Autoplay, EffectCoverflow } from "swiper";
 import { useData } from "../../../../Context/DataProviders";
 import CartNews from "../../Item/CartNews";
+import { Link } from "react-router-dom";
 
 const Section4 = () => {
   const { Posts } = useData();
   const [PostData, setPostData] = React.useState<any>([]);
+
   useEffect(() => {
     const sort = Posts.filter((item: any) => item.type !== "policy");
     setPostData(sort);
   }, [Posts]);
+
   return (
     <>
       <div className="my-16 d:w-[1300px] d:mx-auto p:w-auto p:mx-2">
@@ -30,9 +33,42 @@ const Section4 = () => {
           Sức khỏe vàng trong tầm tay bạn
         </h3>
 
-        <div className="mt-5 ">
-          <CartNews Data={PostData} />
-        </div>
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          slidesPerView={3}
+          slidesPerGroup={1}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          className="mySwiper"
+        >
+          {Posts.filter((item: any) => item.type !== "policy").map(
+            (items: any) => {
+              const timestamp = items.createdAt.toDate();
+
+              const year = timestamp.getFullYear();
+              const month = timestamp.getMonth() + 1;
+              const day = timestamp.getDate();
+              return (
+                <SwiperSlide>
+                  {" "}
+                  <Link to={`/bai-viet/${items.url}`}>
+                    <CartNews
+                      day={day}
+                      month={month}
+                      year={year}
+                      image={items.image}
+                      title={items.title}
+                    />
+                  </Link>
+                </SwiperSlide>
+              );
+            }
+          )}
+        </Swiper>
       </div>
     </>
   );

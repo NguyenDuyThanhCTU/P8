@@ -12,7 +12,7 @@ import Input from "../Input";
 import { useStateProvider } from "../../../../Context/StateProvider";
 import { useData } from "../../../../Context/DataProviders";
 import { TypeProductItems } from "../../../../Utils/item";
-import { convertToCodeFormat, uploadImage } from "../Handle";
+import { convertToCodeFormat, uploadImage } from "../../../Item/Handle";
 import { addDocument } from "../../../../Config/Services/Firebase/FireStoreDB";
 import TextEditor from "../../../Item/TextEditor";
 import { title } from "process";
@@ -133,7 +133,7 @@ const AddProduct = ({}) => {
         setImageUrl(data);
       });
     } else if (type === "subImage") {
-      uploadImage(e, locate).then((data) => {
+      uploadImage(e, locate).then((data: any) => {
         setListSubImage((prevUrls: any) => [...prevUrls, data]);
       });
     }

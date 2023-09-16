@@ -10,7 +10,6 @@ import {
 } from "antd";
 import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
 import moment from "moment";
-import { uploadImage } from "../../../Item/Handle";
 
 import { useData } from "../../../../../Context/DataProviders";
 import { MdOutlineUpdate } from "react-icons/md";
@@ -18,6 +17,7 @@ import { updateDocument } from "../../../../../Config/Services/Firebase/FireStor
 import { useStateProvider } from "../../../../../Context/StateProvider";
 import { useNavigate } from "react-router-dom";
 import InfoAccount from "../Item/AccountInfo";
+import { uploadImage } from "../../../../Item/Handle";
 
 const { TextArea } = Input;
 

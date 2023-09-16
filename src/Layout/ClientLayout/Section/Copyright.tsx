@@ -13,7 +13,7 @@ const Copyright = () => {
       <div>
         <iframe
           src={ContactData.location}
-          className="w-screen h-[50vh]"
+          className="w-full h-[50vh]"
           loading="lazy"
         ></iframe>
       </div>

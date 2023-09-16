@@ -15,7 +15,7 @@ import {
   addDataToArrayField,
   deleteDataFromArrayField,
 } from "../../../../Config/Services/Firebase/FireStoreDB";
-import { convertToCodeFormat } from "../Handle";
+import { convertToCodeFormat } from "../../../Item/Handle";
 
 const AddChildrenType = () => {
   const [Name, setName] = useState("");

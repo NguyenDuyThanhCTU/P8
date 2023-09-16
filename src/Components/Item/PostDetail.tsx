@@ -9,9 +9,7 @@ import { getDocumentById } from "../../Config/Services/Firebase/FireStoreDB";
 const PostDetail: React.FC = () => {
   const [isData, setIsData] = useState<any>();
   const { Posts } = useData();
-  const { setIsLoading } = useStateProvider();
   const { id } = useParams();
-  const router = useNavigate();
 
   useEffect(() => {
     const sort = Posts?.filter((items: any) => items.url === id);
@@ -23,11 +21,6 @@ const PostDetail: React.FC = () => {
   const DetailPostDate = moment
     .unix(isData?.createdAt.seconds)
     .format("MMMM DD, YYYY");
-
-  const HandleChangeNews = (id: any) => {
-    router(`/bai-viet/${id}`);
-    setIsLoading(true);
-  };
 
   return (
     <>
@@ -73,29 +66,33 @@ const PostDetail: React.FC = () => {
                     .format("MMMM DD, YYYY");
 
                   return (
-                    <div key={idx} onClick={() => HandleChangeNews(items.id)}>
-                      <div
-                        className={`flex items-center  cursor-pointer border-b pb-4`}
-                      >
-                        <div className="flex-[30%] h-[60px]">
-                          <img
-                            src={items.image}
-                            alt="postsimage"
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
+                    <Link to={`/bai-viet/${items.url}`}>
+                      <div key={idx}>
+                        <div
+                          className={`flex items-center  cursor-pointer border-b pb-4`}
+                        >
+                          {items.type !== "policy" && (
+                            <div className="flex-[30%] h-[60px]">
+                              <img
+                                src={items.image}
+                                alt="postsimage"
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                          )}
 
-                        <div className="ml-3 flex flex-col gap-2 flex-[70%]">
-                          <p className="truncate1 text-[16px] font-bold">
-                            {items.title}
-                          </p>
-                          <div className="flex items-center gap-1 text-black">
-                            <AiOutlineClockCircle />
-                            <p className="">{formattedDate}</p>
+                          <div className="ml-3 flex flex-col gap-2 flex-[70%]">
+                            <p className="truncate1 text-[16px] font-bold">
+                              {items.title}
+                            </p>
+                            <div className="flex items-center gap-1 text-black">
+                              <AiOutlineClockCircle />
+                              <p className="">{formattedDate}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 }
               )}

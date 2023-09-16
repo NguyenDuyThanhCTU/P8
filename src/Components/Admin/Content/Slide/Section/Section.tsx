@@ -4,7 +4,7 @@ import ListSlide from "./ListSlide/ListSlide";
 import { useStateProvider } from "../../../../../Context/StateProvider";
 import { addDocument } from "../../../../../Config/Services/Firebase/FireStoreDB";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { uploadImage } from "../../../Item/Handle";
+import { uploadImage } from "../../../../Item/Handle";
 
 type ChangeEventType = React.ChangeEvent<HTMLInputElement>;
 

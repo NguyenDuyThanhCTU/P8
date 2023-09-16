@@ -10,13 +10,16 @@ import Copyright from "./Section/Copyright";
 import Footer from "./Section/Footer";
 import { useLocation } from "react-router-dom";
 import Loading from "../../Components/Item/Loading";
+import { useStateProvider } from "../../Context/StateProvider";
 
 const ClientLayout = ({ children }: any) => {
   const { TradeMarkData } = useData();
+  const { setIsLoading } = useStateProvider();
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setIsLoading(true);
   }, [location]);
 
   return (
@@ -27,7 +30,9 @@ const ClientLayout = ({ children }: any) => {
         <link rel="manifest" href={TradeMarkData.websiteIco} />
       </Helmet>
 
-      <Loading />
+      <div className="relative z-50">
+        <Loading />
+      </div>
       <Header />
       <div>{children}</div>
       {/* {location.pathname === "/" ||

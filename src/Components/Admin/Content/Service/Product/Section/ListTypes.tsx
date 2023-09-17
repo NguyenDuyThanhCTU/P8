@@ -3,7 +3,7 @@ import { useStateProvider } from "../../../../../../Context/StateProvider";
 import { useData } from "../../../../../../Context/DataProviders";
 import { TypeProductItems } from "../../../../../../Utils/item";
 
-const ListProduct: React.FC = () => {
+const ListType: React.FC = () => {
   const { setDropDown } = useStateProvider();
   const { productTypes } = useData();
 
@@ -62,4 +62,4 @@ const ListProduct: React.FC = () => {
   );
 };
 
-export default ListProduct;
+export default ListType;

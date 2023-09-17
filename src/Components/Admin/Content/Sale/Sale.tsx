@@ -19,6 +19,7 @@ import { useData } from "../../../../Context/DataProviders";
 import { useStateProvider } from "../../../../Context/StateProvider";
 import TimeSale from "../../../Item/TimeSale";
 
+import AddSaleList from "./Section/AddSaleList";
 interface DataType {
   id: React.Key;
   title: string;
@@ -144,6 +145,7 @@ const Sale: React.FC = () => {
         notification.success({
           message: "Cập nhật thành công",
         });
+
         setIsRefetch("Sale");
         setIsModalOpen(false);
       });
@@ -224,7 +226,7 @@ const Sale: React.FC = () => {
           onCancel={() => setIsModalOpen(false)}
           footer={false}
         >
-          <Form onFinish={onFinish} labelCol={{ span: 5 }} labelAlign="left">
+          <Form onFinish={onFinish} labelCol={{ span: 6 }} labelAlign="left">
             <Form.Item<FormType>
               name="start"
               label="Ngày bắt đầu"
@@ -276,15 +278,13 @@ const Sale: React.FC = () => {
 
       <>
         <Drawer
-          title="Basic Drawer"
+          title="Thêm sản phẩm vào danh sách SALE"
           placement="right"
           onClose={() => setOpen(false)}
           width={800}
           open={open}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <AddSaleList />
         </Drawer>
       </>
     </>

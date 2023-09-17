@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#353535] text-white d:w-[400px] rounded-xl shadow-xl p:w-auto ">
+    <div className="bg-[#353535] text-white min-w-[400px] rounded-xl shadow-xl  ">
       <div className="p-4  ">
         <h3 className="text-[25px] text-center ">Thông tin website</h3>
         <div className="flex flex-col gap-3 mt-5">

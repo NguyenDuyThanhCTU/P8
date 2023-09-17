@@ -38,7 +38,16 @@ const Introduce = () => {
       <h3 className=" text-[44px] text-center font-bold mb-2 uppercase ">
         Cập nhật trang giới thiệu
       </h3>
-
+      <div className="flex justify-end  py-2">
+        <div className=" fixed ">
+          <div
+            className="px-4 py-2 bg-none rounded-l-full   duration-300 text-white bg-red-400  hover:bg-red-600 cursor-pointer"
+            onClick={() => setOpenDrawer(true)}
+          >
+            Thay đổi
+          </div>
+        </div>
+      </div>
       <div
         className={`${
           Introduction.content
@@ -66,14 +75,7 @@ const Introduce = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-center">
-        <div
-          className="px-4 py-2 bg-none    duration-300 text-white bg-red-400  hover:bg-red-600 cursor-pointer"
-          onClick={() => setOpenDrawer(true)}
-        >
-          Thêm ngay
-        </div>
-      </div>
+
       <>
         <Drawer
           title="Cập nhật bài giới thiệu"

@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
           Th Dashboard
         </p>
       </div>
-      <div className="flex flex-col p:ml-2 d:ml-14 gap-16  relative py-10 ">
+      <div className="flex flex-col p:ml-2 d:ml-14 gap-16  relative py-10  ">
         <div className="flex flex-col p:items-center d:items-start gap-4">
           <h3 className="text-[25px] text-center">Website</h3>
           <div className="flex flex-col items-start gap-10">

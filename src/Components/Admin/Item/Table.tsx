@@ -33,7 +33,6 @@ const Table = ({ Data, del, onEdit, onUpdate }: any) => {
 
   return (
     <div>
-      {" "}
       {Data.map((data: any, idx: number) => (
         <div
           key={idx}

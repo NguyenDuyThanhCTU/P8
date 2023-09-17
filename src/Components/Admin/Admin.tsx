@@ -33,7 +33,7 @@ const Admin: React.FC = () => {
           <Sidebar />
         </div>
         <div
-          className={`overflow-hidden flex-[20%]
+          className={`overflow-hidden  d:min-w-[310px] 
           d:block p:hidden`}
         >
           <Sidebar />

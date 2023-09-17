@@ -101,7 +101,7 @@ const AddProduct = ({}) => {
         url: titleUrl,
         sale: {
           discount: 0,
-          newPrice: "0.000",
+          newPrice: "0",
         },
         access: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
         subimage: ListSubImage,

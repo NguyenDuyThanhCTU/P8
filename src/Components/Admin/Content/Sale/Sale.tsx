@@ -3,10 +3,14 @@ import {
   Button,
   DatePicker,
   Drawer,
+  Dropdown,
   Form,
+  MenuProps,
   Modal,
+  Popconfirm,
   Switch,
   Table,
+  message,
   notification,
 } from "antd";
 import { BsPersonPlus } from "react-icons/bs";
@@ -14,14 +18,21 @@ import { ColumnsType, TableProps } from "antd/es/table";
 import { AiOutlineAppstoreAdd, AiOutlineFieldTime } from "react-icons/ai";
 import { type } from "os";
 import moment from "moment";
-import { updateDocument } from "../../../../Config/Services/Firebase/FireStoreDB";
+import {
+  delDocument,
+  deleteDataFromArrayField,
+  updateDocument,
+} from "../../../../Config/Services/Firebase/FireStoreDB";
 import { useData } from "../../../../Context/DataProviders";
 import { useStateProvider } from "../../../../Context/StateProvider";
 import TimeSale from "../../../Item/TimeSale";
 
 import AddSaleList from "./Section/AddSaleList";
+import HandleSale from "./Section/HandleSale";
+import { SlOptionsVertical } from "react-icons/sl";
+
 interface DataType {
-  id: React.Key;
+  id: string;
   title: string;
   image: string;
 
@@ -38,11 +49,90 @@ type FormType = {
 
 const Sale: React.FC = () => {
   const [selectId, setSelectId] = useState<any>("");
+  const [selectIndex, setSelectIndex] = useState<any>("");
+  const [OpenModel, setOpenModel] = useState(false);
   const [detail, setDetal] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const { Sale } = useData();
+  const { Sale, Products, setUpdateId } = useData();
   const { setIsRefetch } = useStateProvider();
+
+  const cartMap: any = {};
+
+  Sale?.salelist.forEach((itemId: any) => {
+    cartMap[itemId] = (cartMap[itemId] || 0) + 1;
+  });
+
+  const cartProducts: any = [];
+
+  Object.keys(cartMap).forEach((itemId) => {
+    const product = Products.find((product: any) => product.id === itemId);
+    if (product) {
+      cartProducts.push({
+        ...product,
+      });
+    }
+  });
+
+  const HandleOpenModel = () => {
+    setOpenModel(true);
+    setUpdateId(selectId);
+  };
+
+  const confirm = (e: any) => {
+    const data = {
+      sale: {
+        discount: 0,
+        newPrice: "0",
+      },
+    };
+    updateDocument("products", selectId, data).then(() => {
+      deleteDataFromArrayField("website", "Sale", "salelist", selectIndex).then(
+        () => {
+          notification.success({
+            message: "Xóa thành công",
+          });
+        }
+      );
+      setIsRefetch("Sale");
+    });
+  };
+
+  const HandleSelectItem = (record: any) => {
+    setSelectId(record.id);
+    setSelectIndex(record.index);
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <div
+          onClick={() => {
+            HandleOpenModel();
+          }}
+        >
+          Chỉnh sửa thông tin Sale
+        </div>
+      ),
+    },
+
+    {
+      key: "2",
+      label: (
+        <Popconfirm
+          title="Bạn có chắc chắn muốn xóa tài khoản này không?"
+          onConfirm={confirm}
+          onCancel={() => message.success("Tài khoản chưa được xóa")}
+          okButtonProps={{ danger: true }}
+          okText="Có"
+          cancelText="Không"
+        >
+          <div className="text-red-500">Xóa khỏi danh sách SALE</div>
+        </Popconfirm>
+      ),
+    },
+  ];
 
   const columns: ColumnsType<DataType> = [
     {
@@ -57,6 +147,7 @@ const Sale: React.FC = () => {
       dataIndex: "image",
       key: "image",
       width: "10%",
+      fixed: "left",
       render: (photoURL) => (
         <img
           src={photoURL}
@@ -65,13 +156,7 @@ const Sale: React.FC = () => {
         />
       ),
     },
-    // {
-    //   title: "Loại sản phẩm",
-    //   dataIndex: "type",
-    //   key: "type",
-    //   width: "10%",
-    //   fixed: "left",
-    // },
+
     {
       title: "Giá sản phẩm",
       dataIndex: "price",
@@ -80,7 +165,7 @@ const Sale: React.FC = () => {
       fixed: "left",
     },
     {
-      title: "Giá khuyến mãi",
+      title: "Giá mới",
       dataIndex: "newPrice",
       key: "newPrice",
       width: "10%",
@@ -93,7 +178,38 @@ const Sale: React.FC = () => {
       width: "10%",
       fixed: "left",
     },
+    {
+      title: "",
+      dataIndex: "handle",
+      width: "10%",
+      render: () => (
+        //console.log id of account element in table when click
+        <Dropdown
+          trigger={["click"]}
+          placement="bottomRight"
+          overlay={
+            <div className="flex flex-col gap-2 bg-white rounded-lg shadow-lg shadow-gray-400 cursor-pointer">
+              <div className="">
+                {items.map((item: any) => (
+                  <div
+                    className="py-2 px-4 hover:bg-slate-300 duration-300"
+                    key={item.key}
+                  >
+                    {item.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          }
+        >
+          <div className="flex justify-center items-center cursor-pointer   ">
+            <SlOptionsVertical className="text-[30px] hover:border-2 rounded-full p-1 duration-300 hover:border-red-400 hover:text-red-400" />
+          </div>
+        </Dropdown>
+      ),
+    },
   ];
+
   const onChange: TableProps<DataType>["onChange"] = (
     pagination,
     filters,
@@ -102,16 +218,18 @@ const Sale: React.FC = () => {
   ) => {
     console.log("params", pagination, filters, sorter, extra);
   };
-  const data: DataType[] = [
-    // {
-    //   id: "1",
-    //   username: "John Brown",
-    // },
-    // {
-    //   id: "2",
-    //   username: "Jim Green",
-    // },
-  ];
+
+  const data: DataType[] = cartProducts.map((product: any, idx: number) => {
+    return {
+      id: product.id,
+      index: idx,
+      title: product.title,
+      image: product.image,
+      price: product.price,
+      newPrice: product.sale.newPrice,
+      discount: `${product.sale.discount}%`,
+    };
+  });
 
   const onFinish = (values: any) => {
     const currentTime = new Date();
@@ -158,7 +276,7 @@ const Sale: React.FC = () => {
         onRow={(record) => {
           return {
             onClick: () => {
-              setSelectId(record.id);
+              HandleSelectItem(record);
             },
           };
         }}
@@ -167,7 +285,7 @@ const Sale: React.FC = () => {
         columns={columns}
         dataSource={data}
         onChange={onChange}
-        scroll={{ y: 240 }}
+        scroll={{ y: 360 }}
         title={() => (
           <div className="flex justify-between items-center">
             <div className="flex gap-3">
@@ -286,6 +404,17 @@ const Sale: React.FC = () => {
         >
           <AddSaleList />
         </Drawer>
+      </>
+
+      <>
+        <Modal
+          title={`Thông tin SALE sản phẩm ${cartProducts[selectIndex]?.title}`}
+          open={OpenModel}
+          onCancel={() => setOpenModel(false)}
+          footer={false}
+        >
+          <HandleSale setOpen={setOpen} />
+        </Modal>
       </>
     </>
   );

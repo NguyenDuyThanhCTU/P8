@@ -279,6 +279,33 @@ export const HeaderItems = [
   },
 ];
 
+export const ToolsTipsSocialMediaItems = [
+  {
+    title: "zalo.me/...",
+  },
+  {
+    title: "www.facebook.com/...",
+  },
+  {
+    title: "www.facebook.com/plugins/page.php?href=....",
+  },
+  {
+    title: "",
+  },
+  {
+    title: "www.instagram.com/...",
+  },
+  {
+    title: "www.tiktok.com/...",
+  },
+  {
+    title: "www.twitter.com/...",
+  },
+  {
+    title: "www.youtube.com/...",
+  },
+];
+
 /*<-------------------------------------------------------------------------------------------------------------------- CUSTOM --------------------------------------------------------------------------------------------------------------------> */
 
 export const TypePostItems = [

@@ -22,7 +22,6 @@ const Products: React.FC = () => {
       );
       const sortType = Products?.filter((items: any) => items.typeUrl === id);
 
-      console.log(sortParent.length, sortChildren.length, sortType.length, id);
       if (sortParent.length > 0) {
         setProductFetch(sortParent);
         setNavigateUrl("parent");

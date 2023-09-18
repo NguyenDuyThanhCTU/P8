@@ -4,7 +4,11 @@ import Card from "./Card/Card";
 import { useData } from "../../../../Context/DataProviders";
 import { updateArrayFieldAtIndex } from "../../../../Config/Services/Firebase/FireStoreDB";
 import { notification } from "antd";
-import { IconMapping, SocialMediaDashboard } from "../../../../Utils/item";
+import {
+  IconMapping,
+  SocialMediaDashboard,
+  ToolsTipsSocialMediaItems,
+} from "../../../../Utils/item";
 import { useStateProvider } from "../../../../Context/StateProvider";
 
 const SocialMedia: React.FC = () => {
@@ -38,9 +42,11 @@ const SocialMedia: React.FC = () => {
           {SocialMediaDashboard.map((items, idx) => {
             let Icon = IconMapping[items.icon];
             const SocialMediaItems = SocialMedia[idx];
+            const ToolsTips = ToolsTipsSocialMediaItems[idx];
             return (
               <Card
                 key={idx}
+                ToolsTips={ToolsTips.title}
                 placeholder={SocialMediaItems}
                 title={items.title}
                 Icon={Icon}

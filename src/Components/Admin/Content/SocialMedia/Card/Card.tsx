@@ -1,5 +1,6 @@
-import { Popconfirm, message } from "antd";
+import { Popconfirm, Tooltip, message } from "antd";
 import React from "react";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -11,6 +12,7 @@ interface IconProps {
 interface CardProps {
   title: string;
   Icon?: React.ComponentType<IconProps>;
+  ToolsTips: any;
   image: string;
   style: string;
   setSelected: React.Dispatch<React.SetStateAction<number | undefined>>;
@@ -23,6 +25,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({
   title,
+  ToolsTips,
   Icon,
   image,
   style,
@@ -51,30 +54,9 @@ const Card: React.FC<CardProps> = ({
       <div className="mx-2 ">
         <div className="flex justify-between items-center mb-4">
           <h3 className="italic">{title}</h3>
-          <div className="group relative mr-2">
-            <SlOptionsVertical className=" hover:scale-125 duration-300 " />
-            <div className="w-[80px] bg-white opacity-90 absolute -top-2 h-8 right-5 rounded-lg hidden group-hover:block ">
-              <div className="mx-3 flex  justify-between text-[24px] h-full items-center ">
-                <FiEdit className="text-green-600 hover:scale-125 duration-300" />
-                <Popconfirm
-                  title="Xóa sản phẩm"
-                  description="Bạn muốn xóa thông tin này?"
-                  onConfirm={() => {
-                    // HandleDelete();
-                  }}
-                  onCancel={() => {
-                    message.error("Thông tin chưa được xóa!");
-                  }}
-                  okText="Yes"
-                  okType="danger"
-                  cancelText="No"
-                >
-                  <MdDeleteForever className="text-red-600 hover:scale-125 duration-300" />
-                </Popconfirm>
-              </div>
-              <div className="absolute bg-none w-3 h-8 top-0 -right-2"></div>
-            </div>
-          </div>
+          <Tooltip title={ToolsTips} color="#2db7f5">
+            <AiOutlineQuestionCircle className=" text-[24px] mr-2" />
+          </Tooltip>
         </div>
         <div className="" onClick={() => setSelected(idx)}>
           <input

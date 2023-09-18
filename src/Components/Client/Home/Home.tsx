@@ -6,13 +6,21 @@ import { useData } from "../../../Context/DataProviders";
 
 import { TypeProductItems } from "../../../Utils/item";
 import Section4 from "./Section/Section4";
+import SaleFE from "../Sale/Sale";
+import moment from "moment";
 
 const Home: React.FC = () => {
-  const { Products } = useData();
+  const { Products, Sale } = useData();
+  const currentTime = new Date();
+  const formatCurrentTime = moment(currentTime).format("YYYY-MM-DD");
 
   return (
     <>
       <Section1 />
+      {Sale?.salelist?.length > 0 && formatCurrentTime <= Sale.end && (
+        <SaleFE />
+      )}
+
       <Section2 Data={Products} />
 
       {TypeProductItems.map((items: any, idx: number) => {

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Section1 = () => {
   const { Slides } = useData();
-  console.log(Slides);
+
   return (
     <div className="my-16 d:w-[1300px] d:mx-auto p:w-auto ">
       <Swiper

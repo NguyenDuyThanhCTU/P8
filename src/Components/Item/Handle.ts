@@ -34,26 +34,17 @@ export const convertToCodeFormat = (text: string) => {
   return textWithoutDiacritics.replace(/\s+/g, "-").toLowerCase();
 };
 
-export default class UploadAdapter {
-  loader: any;
-  locate: any;
-
-  constructor(loader: any, locate: any) {
-    this.loader = loader;
-    this.locate = locate;
-  }
-
-  upload() {
-    return this.loader.file.then((file: any) => {
-      return uploadImage(file, this.locate).then((url: any) => {
-        return {
-          default: url,
-        };
-      });
-    });
-  }
-
-  abort() {
-    // Hàm này để hủy tải lên nếu cần (không cần thiết trong trường hợp của bạn).
-  }
-}
+//convert from list id of product to list product
+export const convertListIdToProduct = (
+  listId: string[],
+  listProduct: any[]
+) => {
+  let result: any[] = [];
+  listId.forEach((id) => {
+    const product = listProduct.find((product) => product.id === id);
+    if (product) {
+      result.push(product);
+    }
+  });
+  return result;
+};

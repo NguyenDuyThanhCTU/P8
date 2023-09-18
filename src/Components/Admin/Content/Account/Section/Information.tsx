@@ -38,7 +38,7 @@ const Information = ({ showModal }: any) => {
         delete values[key];
       }
     }
-
+    console.log(values);
     updateDocument("accounts", HeaderAdmin.id, values).then(() => {
       notification.success({
         message: "Cập nhật thành công",

@@ -11,7 +11,6 @@ const Video: React.FC = () => {
   const showModal = (url: string) => {
     setIsModalOpen(true);
     setVideo(url);
-    console.log(url);
   };
 
   const handleCancel = () => {

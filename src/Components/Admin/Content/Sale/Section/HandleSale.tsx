@@ -38,7 +38,7 @@ const HandleSale = ({ setOpen }: any) => {
       const calculatedNewPriceWithDot = calculatedNewPrice
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      console.log(calculatedNewPriceWithDot);
+
       setNewPrice(calculatedNewPriceWithDot);
     }
   };
@@ -75,6 +75,7 @@ const HandleSale = ({ setOpen }: any) => {
       }
       setIsRefetch("upload successful");
       setOpen(false);
+      handleDiscard();
     });
 
     //add id of product to Sale document

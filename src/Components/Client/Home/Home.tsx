@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const formatCurrentTime = moment(currentTime).format("YYYY-MM-DD");
 
   return (
-    <>
+    <div className="mt-52">
       <Section1 />
       {Sale?.salelist?.length > 0 && formatCurrentTime <= Sale.end && (
         <SaleFE />
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
         );
       })}
       <Section4 />
-    </>
+    </div>
   );
 };
 

@@ -14,8 +14,9 @@ import { useData } from "../../../../Context/DataProviders";
 import { TypeProductItems } from "../../../../Utils/item";
 import { convertToCodeFormat, uploadImage } from "../../../Item/Handle";
 import { addDocument } from "../../../../Config/Services/Firebase/FireStoreDB";
-import TextEditor from "../../../Item/TextEditor";
+
 import { title } from "process";
+import TextEditor from "../CKEditor/TextEditor";
 
 const AddProduct = ({}) => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();

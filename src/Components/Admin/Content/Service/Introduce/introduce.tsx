@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Drawer, Empty, notification } from "antd";
 import { useData } from "../../../../../Context/DataProviders";
-import TextEditor from "../../../../Item/TextEditor";
+
 import {
   addDataToDocument,
   updateDocument,
 } from "../../../../../Config/Services/Firebase/FireStoreDB";
 import { useStateProvider } from "../../../../../Context/StateProvider";
+import TextEditor from "../../../Item/CKEditor/TextEditor";
 
 const Introduce = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -15,7 +16,7 @@ const Introduce = () => {
   const { setIsRefetch } = useStateProvider();
 
   //refetch data when Introduction change
-  console.log(Introduction);
+
   const initIntroduction =
     "<p>Chưa có thông tin giới thiệu?</p> <p>Thêm ngay...</p> ";
 

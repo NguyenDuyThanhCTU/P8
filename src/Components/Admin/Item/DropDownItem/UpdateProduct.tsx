@@ -3,8 +3,9 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { notification } from "antd";
 import { useStateProvider } from "../../../../Context/StateProvider";
 import { useData } from "../../../../Context/DataProviders";
-import TextEditor from "../../../Item/TextEditor";
+
 import { updateDocument } from "../../../../Config/Services/Firebase/FireStoreDB";
+import TextEditor from "../CKEditor/TextEditor";
 
 const UpdateProduct: React.FC = () => {
   const [discount, setDiscount] = useState<number>(0);

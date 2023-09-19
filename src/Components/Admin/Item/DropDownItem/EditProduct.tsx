@@ -17,7 +17,7 @@ import {
   addDocument,
   updateDocument,
 } from "../../../../Config/Services/Firebase/FireStoreDB";
-import TextEditor from "../../../Item/TextEditor";
+import TextEditor from "../CKEditor/TextEditor";
 
 const AddProduct = ({}) => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();

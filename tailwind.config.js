@@ -38,6 +38,4 @@ module.exports = {
       backgroundColor: {},
     },
   },
-
-  plugins: [require("tailwind-scrollbar")],
 };

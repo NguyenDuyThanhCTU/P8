@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { useData } from "../../Context/DataProviders";
+import {
+  addDocument,
+  delDocument,
+} from "../../Config/Services/Firebase/FireStoreDB";
+import { useStateProvider } from "../../Context/StateProvider";
 
 const TimeSale = () => {
-  const { Sale } = useData();
+  const { Sale, Notification } = useData();
+  const { setIsRefetch } = useStateProvider();
   const [days, setDays] = useState<number>();
   const [minutes, setMinutes] = useState<number>();
   const [seconds, setSeconds] = useState<number>();
@@ -11,7 +17,9 @@ const TimeSale = () => {
 
   let startPoint: any = new Date(Sale.start);
   let endPoint: any = new Date(Sale.end);
+
   let currentTime: any = new Date();
+
   useEffect(() => {
     const interval = setInterval(() => {
       //if startPoint === currentTime => sale is started
@@ -31,7 +39,36 @@ const TimeSale = () => {
     }, 1000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Sale, minutes, seconds, hours]);
+
+  useEffect(() => {
+    if (currentTime > endPoint) {
+      if (Notification.length === 0) {
+        const data = {
+          title: "Sale đã kết thúc",
+          description: `Sale đã kết thúc!. Hãy thêm sản phẩm để bắt đầu đợt SALE mới nhé !`,
+          image:
+            "https://firebasestorage.googleapis.com/v0/b/dora-a85b2.appspot.com/o/flash-sale.png?alt=media&token=bfd300f7-d071-4bc2-a076-81a720e003e0",
+          time: new Date(),
+          type: "sale",
+        };
+        addDocument("notification", data).then(() => {
+          setIsRefetch("notification");
+        });
+      }
+    } else {
+      const sort = Notification.filter((item: any) => item.type === "sale");
+      if (sort.length > 0) {
+        sort.map((item: any) => {
+          delDocument("notification", item.id).then(() => {
+            setIsRefetch("del notification");
+          });
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Notification]);
 
   return (
     <div className="flex items-center gap-2 p-3 ">

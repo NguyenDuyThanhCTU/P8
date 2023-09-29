@@ -13,13 +13,10 @@ import {
   message,
   notification,
 } from "antd";
-import { BsPersonPlus } from "react-icons/bs";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { AiOutlineAppstoreAdd, AiOutlineFieldTime } from "react-icons/ai";
-import { type } from "os";
 import moment from "moment";
 import {
-  delDocument,
   deleteDataFromArrayField,
   updateDocument,
 } from "../../../../Config/Services/Firebase/FireStoreDB";
@@ -56,7 +53,7 @@ const Sale: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { Sale, Products, setUpdateId } = useData();
   const { setIsRefetch } = useStateProvider();
-
+  console.log(Sale);
   const cartMap: any = {};
 
   Sale?.salelist.forEach((itemId: any) => {

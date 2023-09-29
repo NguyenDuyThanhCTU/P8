@@ -26,7 +26,7 @@ const AddProduct = ({}) => {
   const [Content, setContent] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
   const [isType, setIsType] = useState<any>();
-  const [isParent, setIsParent] = useState("Hộp quà-giỏ quà");
+  const [isParent, setIsParent] = useState("SALON Gỗ");
   const [isChildren, setIsChildren] = useState<any>();
   const [typeUrl, setTypeUrl] = useState<string | undefined>();
   const [parentUrl, setParentUrl] = useState<string | undefined>();
@@ -80,7 +80,7 @@ const AddProduct = ({}) => {
     setListSubImage([]);
     setImageUrl("");
   };
-
+  console.log(imageUrl);
   const HandleSubmit = () => {
     if (!Title) {
       notification["error"]({

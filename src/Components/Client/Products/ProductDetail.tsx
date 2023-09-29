@@ -10,10 +10,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import { FiPhoneCall } from "react-icons/fi";
+import Contact from "./Contact";
 
 const ProductDetail = () => {
   const [similarProduct, setSimilarProduct] = useState([]);
   const [ProductFetch, setProductFetch] = useState<any>();
+  const [openContact, setOpenContact] = useState<any>(false);
+
   const { Products } = useData();
   const { id } = useParams();
 
@@ -103,7 +106,10 @@ const ProductDetail = () => {
             </div>
 
             <div className="flex">
-              <div className="py-3 px-8 duration-300 bg-red-500 text-white hover:bg-red-600 rounded-full cursor-pointer flex items-center gap-3">
+              <div
+                className="py-3 px-8 duration-300 bg-red-500 text-white hover:bg-red-600 rounded-full cursor-pointer flex items-center gap-3"
+                onClick={() => setOpenContact(true)}
+              >
                 <FiPhoneCall />
                 <span>Liên hệ</span>
               </div>
@@ -157,6 +163,11 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      <>
+        {openContact && (
+          <Contact setOpenContact={setOpenContact} OpenContact={openContact} />
+        )}
+      </>
     </div>
   );
 };

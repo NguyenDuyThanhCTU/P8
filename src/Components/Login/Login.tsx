@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { LeftSide } from "./Section/LeftSide";
 import { RightSide } from "./Section/RightSide";
 import { ChangePassword } from "./Section/ChangePassword";
-import Alert from "../Item/Alert";
+
 import Loading from "../Item/Loading";
 import { ParticlesCustom } from "./Section/Item/ParticlesCustom";
 

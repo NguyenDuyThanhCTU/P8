@@ -60,7 +60,7 @@ const ListPost: React.FC = () => {
 
               <p className="truncate ">{data.title}</p>
 
-              {data.type === "news" ? (
+              {data.type !== "policy" ? (
                 <>
                   {" "}
                   <Image

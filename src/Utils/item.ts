@@ -329,12 +329,44 @@ export const TypePostItems = [
 
 export const TypeProductItems = [
   {
-    label: "Hộp quà-giỏ quà",
-    value: "hop-qua-gio-qua",
+    label: "SALON Gỗ",
+    value: "salon-go",
   },
   {
-    label: "Yến sào",
-    value: "yen-sao",
+    label: "Bàn Ăn",
+    value: "ban-an",
+  },
+  {
+    label: "Phòng Khách",
+    value: "phong-khach",
+  },
+  {
+    label: "Phòng Ngủ",
+    value: "phong-ngu",
+  },
+  {
+    label: "Kệ Tủ",
+    value: "ke-tu",
+  },
+  {
+    label: "Thờ Cúng",
+    value: "tho-cung",
+  },
+  {
+    label: "Thư Giãn",
+    value: "thu-gian",
+  },
+  {
+    label: "Trẻ Em",
+    value: "tre-em",
+  },
+  {
+    label: "Mỹ Nghệ",
+    value: "my-nghe",
+  },
+  {
+    label: "Nệm",
+    value: "nem",
   },
 ];
 export {};

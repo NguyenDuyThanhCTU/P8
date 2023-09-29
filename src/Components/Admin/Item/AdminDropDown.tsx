@@ -4,7 +4,7 @@ import AddPost from "./DropDownItem/AddPost";
 import AddType from "./DropDownItem/AddType";
 import AddProduct from "./DropDownItem/AddProduct";
 import ProductDetail from "./DropDownItem/ProductDetail";
-import Profile from "./DropDownItem/Profile";
+
 import AddBranch from "./DropDownItem/AddBranch";
 
 import AddChildrenType from "./DropDownItem/AddChildrenType";
@@ -29,8 +29,6 @@ const AdminDropDown = () => {
         <AddBranch />
       ) : isDropDown === "product-detail" ? (
         <ProductDetail />
-      ) : isDropDown === "profile" ? (
-        <Profile />
       ) : null}
     </div>
   );

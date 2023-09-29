@@ -146,8 +146,8 @@ const UpdateProduct: React.FC = () => {
                   <h3 className="uppercase font-bold">Chi tiết sản phẩm</h3>
                   <div className="">
                     <TextEditor
-                      setEditorData={setEditorData}
                       editorData={editorData}
+                      setEditorData={setEditorData}
                     />
                   </div>
                 </div>

@@ -9,7 +9,7 @@ const HeaderDropDown: React.FC = () => {
 
   return (
     <>
-      <div className="p-3 min-w-[260px] border-colortopdownBlue border border-solid rounded bg-white relative z-30 ">
+      <div className="p-3 min-w-[160px] border-colortopdownBlue border border-solid rounded bg-white relative z-30 ">
         <ul className="text-colortopdownGray leading-6 text-[13px] font-semibold">
           <li
             className=" hover:bg-purple-300  duration-300 element-dropdown py-2"

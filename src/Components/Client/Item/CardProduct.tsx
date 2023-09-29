@@ -12,7 +12,7 @@ const CardProduct = ({ Data }: any) => {
   console.log(formatCurrentTime <= Sale.end);
   return (
     <Link to={`/chi-tiet-san-pham/${Data.url}`}>
-      {Data.sale.discount === 0 || formatCurrentTime <= Sale.end ? (
+      {Data.sale.discount === 0 || formatCurrentTime > Sale.end ? (
         <div className="border cursor-pointer ">
           <div className="">
             <div className="p-2">

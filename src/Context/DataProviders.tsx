@@ -37,6 +37,8 @@ export type DataContextType = {
   setIntroPhoto: (introphoto: any) => void;
   Sale: any;
   setSale: (sale: any) => void;
+  Notification: any;
+  setNotification: (notification: any) => void;
 };
 
 export const DataContext = createContext<DataContextType>({
@@ -72,6 +74,8 @@ export const DataContext = createContext<DataContextType>({
   setIntroPhoto: () => {},
   Sale: {},
   setSale: () => {},
+  Notification: [],
+  setNotification: () => {},
 });
 
 export const DataProviders: React.FC<Props> = ({ children }) => {
@@ -99,11 +103,14 @@ export const DataProviders: React.FC<Props> = ({ children }) => {
     archivement: [],
     titles: [],
   });
+  const [Notification, setNotification] = useState([]);
   //custom
 
   return (
     <DataContext.Provider
       value={{
+        Notification,
+        setNotification,
         Sale,
         setSale,
         IntroPhoto,

@@ -1,9 +1,6 @@
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getStorage } from "firebase/storage";
 import diacritic from "diacritic";
-import { Plugin } from "@ckeditor/ckeditor5-core";
-
-// Import the types for CKEditor 5
 
 export const uploadImage = async (fileOrEvent: any, locate: any) => {
   try {

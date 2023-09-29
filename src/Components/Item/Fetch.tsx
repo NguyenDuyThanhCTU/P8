@@ -22,6 +22,7 @@ const Fetch: React.FC = () => {
     setIntroduction,
     setIntroPhoto,
     setSale,
+    setNotification,
     // custom
   } = useData();
 
@@ -57,6 +58,10 @@ const Fetch: React.FC = () => {
       setAccounts(data);
     });
 
+    getAllDocuments("notification").then((data: any) => {
+      setNotification(data);
+    });
+
     getAllDocuments("slide").then((data: any) => {
       setSlides(data?.reverse());
     });
@@ -74,17 +79,21 @@ const Fetch: React.FC = () => {
       }));
     });
 
-    getAllDocuments("posts").then((data: any) => {
-      setPosts(data?.reverse());
-    });
+    setTimeout(() => {
+      getAllDocuments("posts").then((data: any) => {
+        setPosts(data?.reverse());
+      });
+    }, 3000);
 
     getAllDocuments("productTypes").then((data: any) => {
       setProductType(data);
     });
 
-    getAllDocuments("products").then((data: any) => {
-      setProducts(data?.reverse());
-    });
+    setTimeout(() => {
+      getAllDocuments("products").then((data: any) => {
+        setProducts(data?.reverse());
+      });
+    }, 6000);
 
     getAllDocuments("orders").then((data: any) => {
       setOrders(data?.reverse());
@@ -97,6 +106,7 @@ const Fetch: React.FC = () => {
     getAllDocuments("videos").then((data: any) => {
       setVideos(data?.reverse());
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isRefetch,
     setIsRefetch,

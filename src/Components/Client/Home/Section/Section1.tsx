@@ -50,26 +50,17 @@ const Section1 = () => {
         </div>
         <div className=" flex-[55%] px-10">
           <h3 className="font-UTMFleur text-[40px]">Giới thiệu</h3>
-          <h3 className="font-UTMAmerican font-bold text-mainred text-center text-[30px] leading-7">
-            YẾN SÀO TRÍ SƠN - TRISONNEST
+          <h3 className="font-UTMAmerican font-bold text-mainred text-center text-[30px] leading-7 uppercase">
+            Nội thất đại phát
           </h3>
           <div className="indent-3 mt-5">
             <p>
-              Yến Sào Trí Sơn được thành lập từ một sự tình cờ bắt gặp một cặp
-              chim yến về làm tổ ở kho lúa vùng nông thôn đồng bằng sông Cửu
-              Long, hai người bạn đang hợp tác kinh doanh cá giống bắt đầu cải
-              tạo kho lúa đã lâu không sử dụng thành nhà yến.
-            </p>
-            <p className="mt-10">
-              Từ đó chúng tôi nghiên cứu tập tính của Yến phát hiện ra môi
-              trường sống của loài chim yến phụ thuộc vào nhiệt độ, độ ẩm và
-              nguồn thức ăn. Và miền Tây chính là nơi có đầy đủ các điều kiện tự
-              nhiên với sự đa dạng sinh thái từ cánh đồng lúa, vườn cây ăn trái,
-              kênh mương đến các khu rừng tràm, rừng bảo tồn, … đan xen nhau,
-              cung cấp một nguồn thức ăn (côn trùng bay) vô cùng phong phú và
-              dồi dào. Ngoài ra, sự phát triển của loài chim yến còn đem lại
-              hiệu quả cho nông nghiệp như giảm bớt côn trùng, sâu bọ hại mùa
-              màng, tạo nên hệ sinh thái cộng hưởng bền vững trong nông nghiệp!
+              Đồ Gỗ Nội Thất ĐẠI PHÁT chuyên sản xuất kinh doanh Đồ gỗ, Nội thất
+              cao cấp như: Salon, bàn ghế, tủ, giường, chăn drap, gối nệm. Với
+              những sản phẩm có thiết kế từ cổ điển đến hiện đại, đường nét chạm
+              khắc tinh xảo, cầu kì, đảm bảo với khách hàng rằng mỗi sản phẩm
+              đều được chăm chút tỉ mĩ từng công đoạn để tạo nên một sản phẩm
+              hoàn hảo nhất.
             </p>
           </div>
           <Link to={`/gioi-thieu`}>

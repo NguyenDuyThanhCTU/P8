@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { uploadImage } from "../../../Item/Handle";
@@ -15,7 +15,6 @@ const TextEditor = ({ initialValue, onChange }: any) => {
     setEditorData(data);
     onChange(data);
   };
-
   function uploadAdapter(loader: any) {
     return {
       upload: () => {
@@ -49,10 +48,10 @@ const TextEditor = ({ initialValue, onChange }: any) => {
   }
 
   return (
-    <div id="editor">
+    <div>
       <CKEditor
-        config={{ extraPlugins: [uploadPlugin] }}
         editor={ClassicEditor}
+        config={{ extraPlugins: [uploadPlugin] }}
         data={editorData}
         onChange={handleEditorChange}
       />
